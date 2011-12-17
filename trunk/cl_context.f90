@@ -41,13 +41,13 @@ module cl_context_m
 
   interface clCreateContext
     module procedure clCreateContext_nocallback
+    module procedure clCreateContext_single
   end interface clCreateContext
 
 contains
 
-  type(cl_context) function clCreateContext_nocallback(platform, num_devices, devices, errcode_ret) result(context)
+  type(cl_context) function clCreateContext_nocallback(platform, devices, errcode_ret) result(context)
     type(cl_platform_id), intent(in)   :: platform
-    integer,              intent(in)   :: num_devices
     type(cl_device_id),   intent(in)   :: devices(:)
     integer,              intent(out)  :: errcode_ret
 
@@ -75,9 +75,11 @@ contains
       end subroutine clgetdeviceids_setdev
     end interface
 
-    integer :: idev
+    integer :: idev, num_devices
     type(cl_device_id), allocatable :: devs(:)
     
+    num_devices = ubound(devices, dim = 1)
+
     allocate(devs(1:num_devices))
 
     do idev = 1, num_devices
@@ -93,7 +95,20 @@ contains
     deallocate(devs)
     
   end function clCreateContext_nocallback
+  
+  ! -----------------------------------
 
+  type(cl_context) function clCreateContext_single(platform, device, errcode_ret) result(context)
+    type(cl_platform_id), intent(in)   :: platform
+    type(cl_device_id),   intent(in)   :: device
+    integer,              intent(out)  :: errcode_ret
+
+    type(cl_device_id) :: devs(1:1)
+
+    devs(1:1) = device
+    context = clCreateContext_nocallback(platform, devs, errcode_ret)
+
+  end function clCreateContext_single
 end module cl_context_m
 
 !! Local Variables:
