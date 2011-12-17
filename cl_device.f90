@@ -15,7 +15,7 @@
 !!
 !! $Id$
 
-#include "config_F90.h"
+
 
 module cl_device_m
   use cl_types_m
@@ -96,7 +96,7 @@ contains
     integer,              intent(out)  :: num_devices
     integer,              intent(out)  :: status
 
-#ifdef HAVE_OPENCL
+
     integer                         :: idevice
     type(cl_device_id), allocatable :: dev(:)
 
@@ -138,7 +138,7 @@ contains
     end do
 
     deallocate(dev)
-#endif
+
   end subroutine clgetdeviceids_list
 
   ! ----------------------------------------------------------
@@ -151,9 +151,9 @@ contains
 
     integer(8) :: param_value_64
 
-#ifdef HAVE_OPENCL
+
     call clgetdeviceinfo_int64(device, param_name, param_value_64, status)
-#endif
+
 
     param_value = param_value_64 /= 0
 

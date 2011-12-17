@@ -15,7 +15,7 @@
 !!
 !! $Id$
 
-#include "config_F90.h"
+
  
 module cl_program_m
   use cl_types_m
@@ -105,9 +105,9 @@ module cl_program_m
         end subroutine clCreateProgramWithSource_low
       end interface
 
-#ifdef HAVE_OPENCL
+
       call clCreateProgramWithSource_low(context, string, retcode_err, program)
-#endif
+
     end function clCreateProgramWithSource_str
 
 end module cl_program_m

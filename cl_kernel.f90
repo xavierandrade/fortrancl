@@ -15,7 +15,7 @@
 !!
 !! $Id$
 
-#include "config_F90.h"
+
 
 module cl_kernel_m
   use cl_types_m
@@ -161,9 +161,9 @@ contains
       end subroutine clcreatekernel_low
     end interface
 
-#ifdef HAVE_OPENCL
+
     call clcreatekernel_low(program, kernel_name, errcode_ret, kernel)
-#endif
+
 
   end function clCreateKernel_full
 

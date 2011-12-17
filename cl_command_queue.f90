@@ -15,7 +15,7 @@
 !!
 !! $Id$
 
-#include "config_F90.h"
+
  
 module cl_command_queue_m
   use cl_types_m
@@ -140,9 +140,9 @@ contains
       end subroutine clcreatecommandqueue_low
     end interface
 
-#ifdef HAVE_OPENCL
+
     call clcreatecommandqueue_low(context, device, properties, errcode_ret, command_queue)
-#endif
+
 
   end function clCreateCommandQueue_full
 

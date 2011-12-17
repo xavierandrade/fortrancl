@@ -15,7 +15,7 @@
 !!
 !! $Id$
 
-#include "config_F90.h"
+
  
 module cl_context_m
   use cl_types_m
@@ -81,14 +81,14 @@ contains
     allocate(devs(1:num_devices))
 
     do idev = 1, num_devices
-#ifdef HAVE_OPENCL
+
       call clgetdeviceids_setdev(devs(1), idev - 1, devices(idev))
-#endif
+
     end do
     
-#ifdef HAVE_OPENCL
+
     call clcreatecontext_low(platform, num_devices, devs(1), errcode_ret, context)
-#endif
+
 
     deallocate(devs)
     

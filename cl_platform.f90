@@ -15,7 +15,7 @@
 !!
 !! $Id$
 
-#include "config_F90.h"
+
  
 module cl_platform_m
   use cl_types_m
@@ -68,7 +68,7 @@ contains
     integer,              intent(out)  :: num_platforms
     integer,              intent(out)  :: status
 
-#ifdef HAVE_OPENCL
+
     integer                         :: iplatform
     type(cl_platform_id), allocatable :: plat(:)
 
@@ -108,7 +108,7 @@ contains
     end do
 
     deallocate(plat)
-#endif
+
   end subroutine clgetplatformids_list
 
   ! ----------------------------------------------------------
