@@ -19,7 +19,15 @@
 ##
 ## $Id$
 
-noinst_LIBRARIES = libfortrancl.a
+if F90_MOD_UPPERCASE
+  LIBFUNCMOD = CL.@ax_cv_f90_modext@
+else
+  LIBFUNCMOD = cl.@ax_cv_f90_modext@
+endif
+
+nodist_include_HEADERS = $(LIBFUNCMOD)
+
+lib_LIBRARIES = libfortrancl.a
 
 libfortrancl_a_SOURCES =       \
 	cl_types.f90           \
