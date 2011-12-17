@@ -32,13 +32,13 @@ module cl_program_m
 
   interface clReleaseProgram
 
-    subroutine clReleaseProgram_low(program, status)
+    subroutine clReleaseProgram_low(program, errcode_ret)
       use cl_types_m
 
       implicit none
 
       type(cl_program), intent(inout) :: program
-      integer,          intent(out)   :: status
+      integer,          intent(out)   :: errcode_ret
     end subroutine clReleaseProgram_low
 
   end interface clReleaseProgram
@@ -47,14 +47,14 @@ module cl_program_m
 
   interface clBuildProgram
 
-    subroutine clBuildProgram_nodevices(program, options, retcode_err)
+    subroutine clBuildProgram_nodevices(program, options, errcode_ret)
       use cl_types_m
 
       implicit none
 
       type(cl_program),   intent(inout) :: program
       character(len=*),   intent(in)    :: options
-      integer,            intent(in)    :: retcode_err
+      integer,            intent(in)    :: errcode_ret
     end subroutine clBuildProgram_nodevices
 
   end interface clBuildProgram
@@ -63,7 +63,7 @@ module cl_program_m
 
   interface clGetProgramBuildInfo
     
-    subroutine clGetProgramBuildInfo_str(program, device, param_name, param_value, retcode_err)
+    subroutine clGetProgramBuildInfo_str(program, device, param_name, param_value, errcode_ret)
       use cl_types_m
 
       implicit none
@@ -72,7 +72,7 @@ module cl_program_m
       type(cl_device_id), intent(in)    :: device
       integer,            intent(in)    :: param_name
       character(len=*),   intent(out)   :: param_value
-      integer,            intent(out)   :: retcode_err
+      integer,            intent(out)   :: errcode_ret
     end subroutine clGetProgramBuildInfo_str
 
   end interface clGetProgramBuildInfo
@@ -87,26 +87,26 @@ module cl_program_m
 
   contains
 
-    type(cl_program) function clCreateProgramWithSource_str(context, string, retcode_err) result(program)
+    type(cl_program) function clCreateProgramWithSource_str(context, string, errcode_ret) result(program)
       type(cl_context), intent(inout) :: context
       character(len=*), intent(in)    :: string
-      integer,          intent(out)   :: retcode_err
+      integer,          intent(out)   :: errcode_ret
 
       interface 
-        subroutine clCreateProgramWithSource_low(context, string, retcode_err, program)
+        subroutine clCreateProgramWithSource_low(context, string, errcode_ret, program)
           use cl_types_m
 
           implicit none
 
           type(cl_context), intent(inout) :: context
           character(len=*), intent(in)    :: string
-          integer,          intent(out)   :: retcode_err
+          integer,          intent(out)   :: errcode_ret
           type(cl_program), intent(out)   :: program
         end subroutine clCreateProgramWithSource_low
       end interface
 
 
-      call clCreateProgramWithSource_low(context, string, retcode_err, program)
+      call clCreateProgramWithSource_low(context, string, errcode_ret, program)
 
     end function clCreateProgramWithSource_str
 

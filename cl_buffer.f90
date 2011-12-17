@@ -28,13 +28,13 @@ module cl_buffer_m
 
   interface clReleaseMemObject
 
-    subroutine clReleaseMemObject_low(memobj, status)
+    subroutine clReleaseMemObject_low(memobj, errcode_ret)
       use cl_types_m
 
       implicit none
 
       type(cl_mem),           intent(inout) :: memobj
-      integer,                intent(out)   :: status
+      integer,                intent(out)   :: errcode_ret
     end subroutine clReleaseMemObject_low
 
   end interface

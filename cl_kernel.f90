@@ -33,13 +33,13 @@ module cl_kernel_m
 
   interface clReleaseKernel
 
-    subroutine clReleaseKernel_low(kernel, status)
+    subroutine clReleaseKernel_low(kernel, errcode_ret)
       use cl_types_m
 
       implicit none
 
       type(cl_kernel), intent(inout) :: kernel
-      integer,         intent(out)   :: status
+      integer,         intent(out)   :: errcode_ret
     end subroutine clReleaseKernel_low
 
   end interface
@@ -48,7 +48,7 @@ module cl_kernel_m
 
   interface clSetKernelArg
 
-    subroutine clsetkernelarg_buf(kernel, arg_index, arg_value, status)
+    subroutine clsetkernelarg_buf(kernel, arg_index, arg_value, errcode_ret)
       use cl_types_m
 
       implicit none
@@ -56,12 +56,12 @@ module cl_kernel_m
       type(cl_kernel), intent(inout) :: kernel
       integer,         intent(in)    :: arg_index
       type(cl_mem),    intent(in)    :: arg_value
-      integer,         intent(out)   :: status
+      integer,         intent(out)   :: errcode_ret
     end subroutine clsetkernelarg_buf
 
     ! ----------------------------------------------------
 
-    subroutine clsetkernelarg_int(kernel, arg_index, arg_value, status)
+    subroutine clsetkernelarg_int(kernel, arg_index, arg_value, errcode_ret)
       use cl_types_m
 
       implicit none
@@ -69,12 +69,12 @@ module cl_kernel_m
       type(cl_kernel), intent(inout) :: kernel
       integer,         intent(in)    :: arg_index
       integer(4),      intent(in)    :: arg_value
-      integer,         intent(out)   :: status
+      integer,         intent(out)   :: errcode_ret
     end subroutine clsetkernelarg_int
 
     ! ----------------------------------------------------
 
-    subroutine clsetkernelarg_float(kernel, arg_index, arg_value, status)
+    subroutine clsetkernelarg_float(kernel, arg_index, arg_value, errcode_ret)
       use cl_types_m
 
       implicit none
@@ -82,12 +82,12 @@ module cl_kernel_m
       type(cl_kernel), intent(inout) :: kernel
       integer,         intent(in)    :: arg_index
       real(4),         intent(in)    :: arg_value
-      integer,         intent(out)   :: status
+      integer,         intent(out)   :: errcode_ret
     end subroutine clsetkernelarg_float
 
     ! ----------------------------------------------------
 
-    subroutine clsetkernelarg_double(kernel, arg_index, arg_value, status)
+    subroutine clsetkernelarg_double(kernel, arg_index, arg_value, errcode_ret)
       use cl_types_m
 
       implicit none
@@ -95,7 +95,7 @@ module cl_kernel_m
       type(cl_kernel), intent(inout) :: kernel
       integer,         intent(in)    :: arg_index
       real(8),         intent(in)    :: arg_value
-      integer,         intent(out)   :: status
+      integer,         intent(out)   :: errcode_ret
     end subroutine clsetkernelarg_double
 
   end interface clSetKernelArg
@@ -104,7 +104,7 @@ module cl_kernel_m
 
   interface clSetKernelArgLocal
 
-    subroutine clSetKernelArgLocal_low(kernel, arg_index, arg_size, status)
+    subroutine clSetKernelArgLocal_low(kernel, arg_index, arg_size, errcode_ret)
       use cl_types_m
 
       implicit none
@@ -112,7 +112,7 @@ module cl_kernel_m
       type(cl_kernel), intent(inout) :: kernel
       integer,         intent(in)    :: arg_index
       integer(8),      intent(in)    :: arg_size
-      integer,         intent(out)   :: status
+      integer,         intent(out)   :: errcode_ret
     end subroutine clSetKernelArgLocal_low
 
   end interface
@@ -121,7 +121,7 @@ module cl_kernel_m
 
   interface clKernelWorkGroupInfo
 
-    subroutine clkernelworkgroupinfo_int64(kernel, device, param_name, param_value, retcode_err)
+    subroutine clkernelworkgroupinfo_int64(kernel, device, param_name, param_value, errcode_ret)
       use cl_types_m
       
       implicit none
@@ -130,7 +130,7 @@ module cl_kernel_m
       type(cl_device_id), intent(in)    :: device
       integer,            intent(in)    :: param_name
       integer(8),         intent(out)   :: param_value
-      integer,            intent(out)   :: retcode_err
+      integer,            intent(out)   :: errcode_ret
     end subroutine clkernelworkgroupinfo_int64
 
   end interface clKernelWorkGroupInfo
