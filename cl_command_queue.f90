@@ -94,20 +94,7 @@ module cl_command_queue_m
   ! ----------------------------------------------------
 
   interface clEnqueueNDRangeKernel
-
-    subroutine clEnqueueNDRangeKernel_low(command_queue, kernel, dim, globalsizes, localsizes, status)
-      use cl_types_m
-
-      implicit none
-
-      type(cl_command_queue), intent(inout) :: command_queue
-      type(cl_kernel),        intent(inout) :: kernel
-      integer,                intent(in)    :: dim
-      integer(8),             intent(in)    :: globalsizes
-      integer(8),             intent(in)    :: localsizes
-      integer,                intent(out)   :: status
-    end subroutine clEnqueueNDRangeKernel_low
-
+    module procedure clEnqueueNDRangeKernel_simple
   end interface clEnqueueNDRangeKernel
 
   ! ---------------------------------------------------
@@ -143,8 +130,37 @@ contains
 
     call clcreatecommandqueue_low(context, device, properties, errcode_ret, command_queue)
 
-
   end function clCreateCommandQueue_full
+
+  subroutine clEnqueueNDRangeKernel_simple(command_queue, kernel, globalsizes, localsizes, status)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_kernel),        intent(inout) :: kernel
+    integer(8),             intent(in)    :: globalsizes(:)
+    integer(8),             intent(in)    :: localsizes(:)
+    integer,                intent(out)   :: status
+
+    interface
+      subroutine clEnqueueNDRangeKernel_low(command_queue, kernel, work_dim, globalsizes, localsizes, status)
+        use cl_types_m
+
+        implicit none
+
+        type(cl_command_queue), intent(inout) :: command_queue
+        type(cl_kernel),        intent(inout) :: kernel
+        integer,                intent(in)    :: work_dim
+        integer(8),             intent(in)    :: globalsizes
+        integer(8),             intent(in)    :: localsizes
+        integer,                intent(out)   :: status
+      end subroutine clEnqueueNDRangeKernel_low
+    end interface
+
+    integer :: work_dim
+
+    work_dim = min(ubound(globalsizes, dim = 1), ubound(localsizes, dim = 1))
+
+    call clEnqueueNDRangeKernel_low(command_queue, kernel, work_dim, globalsizes(1), localsizes(1), status)
+
+  end subroutine clEnqueueNDRangeKernel_simple
 
 end module cl_command_queue_m
 
