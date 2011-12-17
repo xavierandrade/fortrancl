@@ -39,7 +39,7 @@ module cl_platform_m
     end subroutine clgetplatformids_num
 
     module procedure clgetplatformids_list
-
+    module procedure clgetplatformids_single
   end interface clGetPlatformIDs
 
   ! ---------------------------------------------------
@@ -62,14 +62,13 @@ module cl_platform_m
 
 contains
 
-  subroutine clgetplatformids_list(num_entries, platforms, num_platforms, status)
-    integer,              intent(in)   :: num_entries
+  subroutine clgetplatformids_list(platforms, num_platforms, status)
     type(cl_platform_id), intent(out)  :: platforms(:)
     integer,              intent(out)  :: num_platforms
     integer,              intent(out)  :: status
 
 
-    integer                           :: iplatform
+    integer                           :: iplatform, num_entries
     type(cl_platform_id), allocatable :: plat_c(:)
 
     interface
@@ -99,6 +98,8 @@ contains
     ! cl_platform_id type we need to get all the values in an array
     ! and the copy them explicitly to the return array
 
+    num_entries = ubound(platforms, dim = 1)
+
     allocate(plat_c(1:num_entries))
 
     call clgetplatformids_listall(num_entries, plat_c(1), num_platforms, status)
@@ -110,6 +111,17 @@ contains
     deallocate(plat_c)
 
   end subroutine clgetplatformids_list
+
+  subroutine clgetplatformids_single(platform, num_platforms, status)
+    type(cl_platform_id), intent(out)  :: platform
+    integer,              intent(out)  :: num_platforms
+    integer,              intent(out)  :: status
+
+    type(cl_platform_id) :: plats(1:1)
+
+    call clgetplatformids_list(plats, num_platforms, status)
+    platform = plats(1)
+  end subroutine clgetplatformids_single
 
 end module cl_platform_m
 
