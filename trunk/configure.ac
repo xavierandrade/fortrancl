@@ -17,13 +17,12 @@
 ##
 ## $Id$
 
-AC_PREREQ(2.59)
 AC_INIT([FortranCL],[0.1],[xavier@tddft.org],[fortrancl])
 AC_CONFIG_SRCDIR([cl.f90])
-AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE
 
 AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
 
 # Installation prefix by default
 AC_PREFIX_DEFAULT([/usr/local])
@@ -68,6 +67,11 @@ dnl how Fortran mangles function names
 AC_FC_WRAPPERS
 acx_save_libs="${LIBS}"
 LIBS="${FCEXTRALIBS} $FCLIBS"
+
+AX_F90_MODULE_EXTENSION
+
+AC_SUBST(ax_cv_f90_modext)
+AM_CONDITIONAL(F90_MOD_UPPERCASE, [test x$ax_f90_mod_uppercase = xyes])
 
 AC_CONFIG_FILES([Makefile])
 
