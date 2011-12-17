@@ -44,19 +44,9 @@ AC_PROG_CC
 AC_HEADER_DIRENT
 AC_HEADER_STDC
 AC_CHECK_HEADERS([signal.h errno.h])
-AC_FUNC_ALLOCA
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
-AC_TYPE_PID_T
-AC_TYPE_SIZE_T
-AC_HEADER_TIME
-AC_CHECK_SIZEOF(void*)
-AC_CHECK_SIZEOF(size_t)
-AC_CHECK_TYPES([uint32_t, uint64_t])
-AC_CHECK_SIZEOF(unsigned int)
-AC_CHECK_SIZEOF(unsigned long)
-AC_CHECK_SIZEOF(unsigned long long)
 
 # Checks for library functions.
 AC_PROG_GCC_TRADITIONAL
@@ -64,7 +54,6 @@ AC_FUNC_STAT
 AC_CHECK_HEADER(CL/cl.h, [], [AC_MSG_ERROR([Cannot find the OpenCL header.])], [])
 AC_CHECK_FUNC(clGetPlatformIDs, [], [LIBS=$LIBS" -lOpenCL"])
 AC_CHECK_FUNC(clFinish, [], [AC_MSG_ERROR([Cannot find the OpenCL library.])])
-AC_DEFINE(HAVE_OPENCL, 1, [defined if opencl support is enabled])
 
 AC_PROG_FC([], Fortran 90)
 
