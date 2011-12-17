@@ -15,8 +15,6 @@
 !!
 !! $Id$
 
-#include "config_F90.h"
-
 module cl_types_m
   implicit none 
   

@@ -14,8 +14,6 @@
 !! along with this program.  If not, see <http://www.gnu.org/licenses/>.
 !!
 !! $Id$
-
-#include "config_F90.h"
  
 module cl_buffer_m
   use cl_types_m
@@ -69,9 +67,7 @@ contains
       
     end interface
     
-#ifdef HAVE_OPENCL
     call clCreateBuffer_low(context, flags, size, errcode_ret, buffer)
-#endif
     
   end function clCreateBuffer_noptr
 
