@@ -43,7 +43,7 @@ module cl_device_m
     end subroutine clgetdeviceids_num
 
     module procedure clgetdeviceids_list
-
+    module procedure clgetdeviceids_single
   end interface clGetDeviceIDs
 
   ! ---------------------------------------------------
@@ -88,16 +88,14 @@ module cl_device_m
 
 contains
 
-  subroutine clgetdeviceids_list(platform, device_type, num_entries, devices, num_devices, status)
+  subroutine clgetdeviceids_list(platform, device_type, devices, num_devices, status)
     type(cl_platform_id), intent(in)   :: platform
     integer,              intent(in)   :: device_type
-    integer,              intent(out)  :: num_entries
     type(cl_device_id),   intent(out)  :: devices(:)
     integer,              intent(out)  :: num_devices
     integer,              intent(out)  :: status
 
-
-    integer                         :: idevice
+    integer                         :: idevice, num_entries
     type(cl_device_id), allocatable :: dev(:)
 
     interface
@@ -128,6 +126,8 @@ contains
     ! since our cl_device_id type might be longer than the C
     ! cl_device_id type we need to get all the values in an array
     ! and the copy them explicitly to the return array
+    
+    num_entries = ubound(devices, dim = 1)
 
     allocate(dev(1:num_entries))
 
@@ -142,6 +142,23 @@ contains
   end subroutine clgetdeviceids_list
 
   ! ----------------------------------------------------------
+
+  subroutine clgetdeviceids_single(platform, device_type, device, num_devices, status)
+    type(cl_platform_id), intent(in)   :: platform
+    integer,              intent(in)   :: device_type
+    type(cl_device_id),   intent(out)  :: device
+    integer,              intent(out)  :: num_devices
+    integer,              intent(out)  :: status
+
+    type(cl_device_id) :: devs(1:1)
+    
+    call clgetdeviceids_list(platform, device_type, devs, num_devices, status)
+    device = devs(1)
+
+  end subroutine clgetdeviceids_single
+
+
+  ! ---------------------------------------------------------
 
   subroutine clgetdeviceinfo_logical(device, param_name, param_value, status)
     type(cl_device_id), intent(in)   :: device
