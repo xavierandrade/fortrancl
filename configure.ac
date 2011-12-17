@@ -1,4 +1,4 @@
-## Copyright (C) 2002-2006 M. Marques, A. Castro, A. Rubio, G. Bertsch
+## Copyright (C) 2011 X. Andrade
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 ## 02111-1307, USA.
 ##
-## $Id: configure.ac 8645 2011-12-01 03:53:15Z dstrubbe $
+## $Id$
 
 AC_PREREQ(2.59)
 AC_INIT([FortranCL],[0.1],[xavier@tddft.org],[fortrancl])
