@@ -32,14 +32,14 @@ module cl_device_m
 
   interface clGetDeviceIDs
 
-    subroutine clgetdeviceids_num(platform, device_type, num_devices, status)
+    subroutine clgetdeviceids_num(platform, device_type, num_devices, errcode_ret)
       use cl_types_m
 
       implicit none
       type(cl_platform_id), intent(in)   :: platform
       integer,              intent(in)   :: device_type
       integer,              intent(out)  :: num_devices
-      integer,              intent(out)  :: status
+      integer,              intent(out)  :: errcode_ret
     end subroutine clgetdeviceids_num
 
     module procedure clgetdeviceids_list
@@ -50,34 +50,34 @@ module cl_device_m
 
   interface clGetDeviceInfo
 
-    subroutine clgetdeviceinfo_str(device, param_name, param_value, status)
+    subroutine clgetdeviceinfo_str(device, param_name, param_value, errcode_ret)
       use cl_types_m
 
       implicit none
       type(cl_device_id), intent(in)   :: device
       integer,            intent(in)   :: param_name
       character(len=*),   intent(out)  :: param_value
-      integer,            intent(out)  :: status
+      integer,            intent(out)  :: errcode_ret
     end subroutine clgetdeviceinfo_str
 
-    subroutine clgetdeviceinfo_int(device, param_name, param_value, status)
+    subroutine clgetdeviceinfo_int(device, param_name, param_value, errcode_ret)
       use cl_types_m
 
       implicit none
       type(cl_device_id), intent(in)   :: device
       integer,            intent(in)   :: param_name
       integer,            intent(out)  :: param_value
-      integer,            intent(out)  :: status
+      integer,            intent(out)  :: errcode_ret
     end subroutine clgetdeviceinfo_int
 
-    subroutine clgetdeviceinfo_int64(device, param_name, param_value, status)
+    subroutine clgetdeviceinfo_int64(device, param_name, param_value, errcode_ret)
       use cl_types_m
 
       implicit none
       type(cl_device_id), intent(in)   :: device
       integer,            intent(in)   :: param_name
       integer(8),         intent(out)  :: param_value
-      integer,            intent(out)  :: status
+      integer,            intent(out)  :: errcode_ret
     end subroutine clgetdeviceinfo_int64
 
     module procedure clgetdeviceinfo_logical
@@ -88,18 +88,18 @@ module cl_device_m
 
 contains
 
-  subroutine clgetdeviceids_list(platform, device_type, devices, num_devices, status)
+  subroutine clgetdeviceids_list(platform, device_type, devices, num_devices, errcode_ret)
     type(cl_platform_id), intent(in)   :: platform
     integer,              intent(in)   :: device_type
     type(cl_device_id),   intent(out)  :: devices(:)
     integer,              intent(out)  :: num_devices
-    integer,              intent(out)  :: status
+    integer,              intent(out)  :: errcode_ret
 
     integer                         :: idevice, num_entries
     type(cl_device_id), allocatable :: dev(:)
 
     interface
-      subroutine clgetdeviceids_listall(platform, device_type, num_entries, devices, num_devices, status)
+      subroutine clgetdeviceids_listall(platform, device_type, num_entries, devices, num_devices, errcode_ret)
         use cl_types_m
 
         implicit none
@@ -109,7 +109,7 @@ contains
         integer,              intent(out)  :: num_entries
         type(cl_device_id),   intent(out)  :: devices
         integer,              intent(out)  :: num_devices
-        integer,              intent(out)  :: status
+        integer,              intent(out)  :: errcode_ret
       end subroutine clgetdeviceids_listall
 
       subroutine clgetdeviceids_getdev(alldevices, idevice, device)
@@ -131,7 +131,7 @@ contains
 
     allocate(dev(1:num_entries))
 
-    call clgetdeviceids_listall(platform, device_type, num_entries, dev(1), num_devices, status)
+    call clgetdeviceids_listall(platform, device_type, num_entries, dev(1), num_devices, errcode_ret)
 
     do idevice = 1, num_devices
       call clgetdeviceids_getdev(dev(1), idevice - 1, devices(idevice))
@@ -143,16 +143,16 @@ contains
 
   ! ----------------------------------------------------------
 
-  subroutine clgetdeviceids_single(platform, device_type, device, num_devices, status)
+  subroutine clgetdeviceids_single(platform, device_type, device, num_devices, errcode_ret)
     type(cl_platform_id), intent(in)   :: platform
     integer,              intent(in)   :: device_type
     type(cl_device_id),   intent(out)  :: device
     integer,              intent(out)  :: num_devices
-    integer,              intent(out)  :: status
+    integer,              intent(out)  :: errcode_ret
 
     type(cl_device_id) :: devs(1:1)
     
-    call clgetdeviceids_list(platform, device_type, devs, num_devices, status)
+    call clgetdeviceids_list(platform, device_type, devs, num_devices, errcode_ret)
     device = devs(1)
 
   end subroutine clgetdeviceids_single
@@ -160,16 +160,16 @@ contains
 
   ! ---------------------------------------------------------
 
-  subroutine clgetdeviceinfo_logical(device, param_name, param_value, status)
+  subroutine clgetdeviceinfo_logical(device, param_name, param_value, errcode_ret)
     type(cl_device_id), intent(in)   :: device
     integer,            intent(in)   :: param_name
     logical,            intent(out)  :: param_value
-    integer,            intent(out)  :: status
+    integer,            intent(out)  :: errcode_ret
 
     integer(8) :: param_value_64
 
 
-    call clgetdeviceinfo_int64(device, param_name, param_value_64, status)
+    call clgetdeviceinfo_int64(device, param_name, param_value_64, errcode_ret)
 
 
     param_value = param_value_64 /= 0

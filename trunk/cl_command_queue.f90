@@ -15,8 +15,6 @@
 !!
 !! $Id$
 
-
- 
 module cl_command_queue_m
   use cl_types_m
 
@@ -38,24 +36,24 @@ module cl_command_queue_m
   ! called, but no type checking will be done by the compiler.
   
   !  interface
-  !    subroutine clEnqueueWriteBuffer(command_queue, buffer, blocking_write, offset, cb, ptr, retcode_err)
+  !    subroutine clEnqueueWriteBuffer(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
   !      type(cl_command_queue), intent(inout) :: command_queue
   !      type(cl_mem),           intent(inout) :: buffer
   !      integer,                intent(in)    :: blocking_write
   !      integer(8),             intent(in)    :: offset
   !      integer(8),             intent(in)    :: cb
   !      type(any),              intent(inout) :: ptr
-  !      integer,                intent(out)   :: retcode_err
+  !      integer,                intent(out)   :: errcode_ret
   !    end subroutine clEnqueueWriteBuffer
   
-  !    subroutine clEnqueueReadBuffer(command_queue, buffer, blocking_write, offset, cb, ptr, retcode_err)
+  !    subroutine clEnqueueReadBuffer(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
   !      type(cl_command_queue), intent(inout) :: command_queue
   !      type(cl_mem),           intent(inout) :: buffer
   !      integer,                intent(in)    :: blocking_write
   !      integer(8),             intent(in)    :: offset
   !      integer(8),             intent(in)    :: cb
   !      type(any),              intent(inout) :: ptr
-  !      integer,                intent(out)   :: retcode_err
+  !      integer,                intent(out)   :: errcode_ret
   !    end subroutine clEnqueueReadBuffer
   
   !  end interface
@@ -64,13 +62,13 @@ module cl_command_queue_m
 
   interface clReleaseCommandQueue
 
-    subroutine clReleaseCommandQueue_low(command_queue, status)
+    subroutine clReleaseCommandQueue_low(command_queue, errcode_ret)
       use cl_types_m
 
       implicit none
 
       type(cl_command_queue), intent(inout) :: command_queue
-      integer,                intent(out)   :: status
+      integer,                intent(out)   :: errcode_ret
 
     end subroutine clReleaseCommandQueue_low
 
@@ -80,13 +78,13 @@ module cl_command_queue_m
 
   interface clFinish
 
-    subroutine clFinish_low(command_queue, status)
+    subroutine clFinish_low(command_queue, errcode_ret)
       use cl_types_m
 
       implicit none
       
       type(cl_command_queue), intent(inout) :: command_queue
-      integer,                intent(out)   :: status
+      integer,                intent(out)   :: errcode_ret
     end subroutine clFinish_low
 
   end interface clFinish
@@ -132,15 +130,15 @@ contains
 
   end function clCreateCommandQueue_full
 
-  subroutine clEnqueueNDRangeKernel_simple(command_queue, kernel, globalsizes, localsizes, status)
+  subroutine clEnqueueNDRangeKernel_simple(command_queue, kernel, globalsizes, localsizes, errcode_ret)
     type(cl_command_queue), intent(inout) :: command_queue
     type(cl_kernel),        intent(inout) :: kernel
     integer(8),             intent(in)    :: globalsizes(:)
     integer(8),             intent(in)    :: localsizes(:)
-    integer,                intent(out)   :: status
+    integer,                intent(out)   :: errcode_ret
 
     interface
-      subroutine clEnqueueNDRangeKernel_low(command_queue, kernel, work_dim, globalsizes, localsizes, status)
+      subroutine clEnqueueNDRangeKernel_low(command_queue, kernel, work_dim, globalsizes, localsizes, errcode_ret)
         use cl_types_m
 
         implicit none
@@ -150,7 +148,7 @@ contains
         integer,                intent(in)    :: work_dim
         integer(8),             intent(in)    :: globalsizes
         integer(8),             intent(in)    :: localsizes
-        integer,                intent(out)   :: status
+        integer,                intent(out)   :: errcode_ret
       end subroutine clEnqueueNDRangeKernel_low
     end interface
 
@@ -158,7 +156,7 @@ contains
 
     work_dim = min(ubound(globalsizes, dim = 1), ubound(localsizes, dim = 1))
 
-    call clEnqueueNDRangeKernel_low(command_queue, kernel, work_dim, globalsizes(1), localsizes(1), status)
+    call clEnqueueNDRangeKernel_low(command_queue, kernel, work_dim, globalsizes(1), localsizes(1), errcode_ret)
 
   end subroutine clEnqueueNDRangeKernel_simple
 

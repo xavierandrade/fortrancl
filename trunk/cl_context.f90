@@ -29,13 +29,13 @@ module cl_context_m
     clReleaseContext
 
   interface clReleaseContext
-    subroutine clReleaseContext_low(context, status)
+    subroutine clReleaseContext_low(context, errcode_ret)
       use cl_types_m
 
       implicit none
 
       type(cl_context), intent(inout) :: context
-      integer,          intent(out)   :: status
+      integer,          intent(out)   :: errcode_ret
     end subroutine clReleaseContext_low
   end interface
 

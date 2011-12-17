@@ -30,12 +30,12 @@ module cl_platform_m
 
   interface clGetPlatformIDs
 
-    subroutine clgetplatformids_num(num_platforms, status)
+    subroutine clgetplatformids_num(num_platforms, errcode_ret)
       use cl_types_m
 
       implicit none
       integer,              intent(out)  :: num_platforms
-      integer,              intent(out)  :: status
+      integer,              intent(out)  :: errcode_ret
     end subroutine clgetplatformids_num
 
     module procedure clgetplatformids_list
@@ -46,14 +46,14 @@ module cl_platform_m
 
   interface clGetPlatformInfo
 
-    subroutine clGetPlatformInfo_str(platform, param_name, param_value, status)
+    subroutine clGetPlatformInfo_str(platform, param_name, param_value, errcode_ret)
       use cl_types_m
 
       implicit none
       type(cl_platform_id), intent(in)   :: platform
       integer,              intent(in)   :: param_name
       character(len=*),     intent(out)  :: param_value
-      integer,              intent(out)  :: status
+      integer,              intent(out)  :: errcode_ret
     end subroutine clGetPlatformInfo_str
 
   end interface clGetPlatformInfo
@@ -62,17 +62,17 @@ module cl_platform_m
 
 contains
 
-  subroutine clgetplatformids_list(platforms, num_platforms, status)
+  subroutine clgetplatformids_list(platforms, num_platforms, errcode_ret)
     type(cl_platform_id), intent(out)  :: platforms(:)
     integer,              intent(out)  :: num_platforms
-    integer,              intent(out)  :: status
+    integer,              intent(out)  :: errcode_ret
 
 
     integer                           :: iplatform, num_entries
     type(cl_platform_id), allocatable :: plat_c(:)
 
     interface
-      subroutine clgetplatformids_listall(num_entries, platforms, num_platforms, status)
+      subroutine clgetplatformids_listall(num_entries, platforms, num_platforms, errcode_ret)
         use cl_types_m
 
         implicit none
@@ -80,7 +80,7 @@ contains
         integer,              intent(in)   :: num_entries
         type(cl_platform_id), intent(out)  :: platforms
         integer,              intent(out)  :: num_platforms
-        integer,              intent(out)  :: status
+        integer,              intent(out)  :: errcode_ret
       end subroutine clgetplatformids_listall
 
       subroutine clgetplatformids_getplat(allplatforms, iplatform, platform)
@@ -102,7 +102,7 @@ contains
 
     allocate(plat_c(1:num_entries))
 
-    call clgetplatformids_listall(num_entries, plat_c(1), num_platforms, status)
+    call clgetplatformids_listall(num_entries, plat_c(1), num_platforms, errcode_ret)
 
     do iplatform = 1, num_platforms
       call clgetplatformids_getplat(plat_c(1), iplatform - 1, platforms(iplatform))
@@ -112,14 +112,14 @@ contains
 
   end subroutine clgetplatformids_list
 
-  subroutine clgetplatformids_single(platform, num_platforms, status)
+  subroutine clgetplatformids_single(platform, num_platforms, errcode_ret)
     type(cl_platform_id), intent(out)  :: platform
     integer,              intent(out)  :: num_platforms
-    integer,              intent(out)  :: status
+    integer,              intent(out)  :: errcode_ret
 
     type(cl_platform_id) :: plats(1:1)
 
-    call clgetplatformids_list(plats, num_platforms, status)
+    call clgetplatformids_list(plats, num_platforms, errcode_ret)
     platform = plats(1)
   end subroutine clgetplatformids_single
 
