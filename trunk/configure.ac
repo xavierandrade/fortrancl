@@ -40,9 +40,7 @@ AC_PROG_YACC
 AC_PROG_CC
 
 # Checks for header files.
-AC_HEADER_DIRENT
 AC_HEADER_STDC
-AC_CHECK_HEADERS([signal.h errno.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
