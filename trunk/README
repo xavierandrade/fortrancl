@@ -30,13 +30,13 @@ make
 make install
 
 The installation directory can be set by the --prefix configure
-option. The Fortran compiler can be specified using the FC
-variable. For example:
+option. The Fortran compiler can be specified using the FC variable
+and the compilation flags with the FCFLAGS variable. For example:
 
-./configure --prefix=/opt FC=ifort
+./configure --prefix=/opt FC=ifort FCFLAGS="-O3"
 
 will set the installation directory to /opt and the Fortran compiler
-to ifort.
+to ifort with the -O3 flag.
 
 See the INSTALL file for more details.
 
@@ -75,3 +75,4 @@ a full OpenCL code in Fortran.
 
 This is an alpha release, our aim is to keep the interface unchanged
  for future releases but this is not guaranteed.
+

@@ -57,7 +57,10 @@ if test x"$FC" = x; then
 fi
 AC_LANG_PUSH(Fortran)
 AC_FC_SRCEXT(f90)
+
 FCFLAGS="${acx_save_fcflags}"
+
+ACX_FCFLAGS
 
 dnl how Fortran mangles function names
 AC_FC_WRAPPERS
