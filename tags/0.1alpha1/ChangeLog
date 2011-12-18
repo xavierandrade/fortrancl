@@ -1,0 +1,109 @@
+------------------------------------------------------------------------
+r19 | xavier.andrade.valencia@gmail.com | 2011-12-17 20:19:57 -0500 (Sat, 17 Dec 2011) | 2 lines
+
+Wrote the README file.
+
+------------------------------------------------------------------------
+r18 | xavier.andrade.valencia@gmail.com | 2011-12-17 19:48:54 -0500 (Sat, 17 Dec 2011) | 4 lines
+
+* Added LGPL notice to all files.
+* Changed "This program" to FortranCL in the LGPL notice.
+
+
+------------------------------------------------------------------------
+r17 | xavier.andrade.valencia@gmail.com | 2011-12-17 19:31:19 -0500 (Sat, 17 Dec 2011) | 2 lines
+
+sum.cl was not being included in the distribution.
+
+------------------------------------------------------------------------
+r16 | xavier.andrade.valencia@gmail.com | 2011-12-17 19:24:27 -0500 (Sat, 17 Dec 2011) | 2 lines
+
+Set version to 0.1alpha1.
+
+------------------------------------------------------------------------
+r15 | xavier.andrade.valencia@gmail.com | 2011-12-17 19:23:05 -0500 (Sat, 17 Dec 2011) | 3 lines
+
+Added an example file.
+
+
+------------------------------------------------------------------------
+r14 | xavier.andrade.valencia@gmail.com | 2011-12-17 18:49:37 -0500 (Sat, 17 Dec 2011) | 3 lines
+
+Renamed the status argument to errcode_ret.
+
+
+------------------------------------------------------------------------
+r13 | xavier.andrade.valencia@gmail.com | 2011-12-17 18:24:41 -0500 (Sat, 17 Dec 2011) | 3 lines
+
+Improved the interface for clEnqueueNDRangeKernel.
+
+
+------------------------------------------------------------------------
+r12 | xavier.andrade.valencia@gmail.com | 2011-12-17 17:43:50 -0500 (Sat, 17 Dec 2011) | 4 lines
+
+* The num_devices argument to clCreateContext is not necessary.
+* Added a scalar version of clCreateContext.
+
+
+------------------------------------------------------------------------
+r11 | xavier.andrade.valencia@gmail.com | 2011-12-17 16:45:06 -0500 (Sat, 17 Dec 2011) | 7 lines
+
+* The interface for clGetDeviceIDs and clGetPlatformIDs no longer
+receives the number of entries as argument, they can be obtained from
+the array properties.
+
+* Added a scalar interface for clGetDeviceIDs and clGetPlatformIDs.
+
+
+------------------------------------------------------------------------
+r10 | xavier.andrade.valencia@gmail.com | 2011-12-17 11:20:31 -0500 (Sat, 17 Dec 2011) | 2 lines
+
+Fixed wrong intent.
+
+------------------------------------------------------------------------
+r9 | xavier.andrade.valencia@gmail.com | 2011-12-16 23:29:40 -0500 (Fri, 16 Dec 2011) | 2 lines
+
+Removed more unused macros.
+
+------------------------------------------------------------------------
+r8 | xavier.andrade.valencia@gmail.com | 2011-12-16 23:20:51 -0500 (Fri, 16 Dec 2011) | 2 lines
+
+Now `make install` works.
+
+------------------------------------------------------------------------
+r7 | xavier.andrade.valencia@gmail.com | 2011-12-16 23:00:47 -0500 (Fri, 16 Dec 2011) | 2 lines
+
+Fixed copyright.
+
+------------------------------------------------------------------------
+r6 | xavier.andrade.valencia@gmail.com | 2011-12-16 22:58:38 -0500 (Fri, 16 Dec 2011) | 2 lines
+
+Removed unnecessary macros.
+
+------------------------------------------------------------------------
+r5 | xavier.andrade.valencia@gmail.com | 2011-12-16 22:48:39 -0500 (Fri, 16 Dec 2011) | 2 lines
+
+Some files to make autotools happy.
+
+------------------------------------------------------------------------
+r4 | xavier.andrade.valencia@gmail.com | 2011-12-16 22:47:25 -0500 (Fri, 16 Dec 2011) | 3 lines
+
+Basic build system.
+
+
+------------------------------------------------------------------------
+r3 | xavier.andrade.valencia@gmail.com | 2011-11-21 11:23:06 -0500 (Mon, 21 Nov 2011) | 2 lines
+
+Fixed a constant definition.
+
+------------------------------------------------------------------------
+r2 | xavier.andrade.valencia@gmail.com | 2011-11-06 20:38:26 -0500 (Sun, 06 Nov 2011) | 3 lines
+
+Initial copy of the FortranCL files.
+
+
+------------------------------------------------------------------------
+r1 | (no author) | 2011-11-06 19:23:31 -0500 (Sun, 06 Nov 2011) | 1 line
+
+Initial directory structure.
+------------------------------------------------------------------------
