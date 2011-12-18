@@ -1,0 +1,68 @@
+FortranCL is an OpenCL interface for Fortran 90. It allows programmers
+to call OpenCL directly from Fortran. Kernels are still written in C.
+
+The interface is designed to be as close to C OpenCL interface as
+possible, while written in native Fortran 90 with type checking.
+
+The interface is not complete but provides all the basic calls
+required to write a full Fortran 90 OpenCL program.
+
+INSTALLATION
+============
+
+To compile and install FortranCL you need a Fortran compiler (the same
+you will use to compile your OpenCL Fortran code), Gfortran is a good
+choice.
+
+The basic installation procedure is to run:
+
+./configure
+make 
+make install
+
+The installation directory can be set by the --prefix configure
+option. The Fortran compiler can be specified using the FC
+variable. For example:
+
+./configure --prefix=/opt FC=ifort
+
+will set the installation directory to /opt and the Fortran compiler
+to ifort.
+
+See the INSTALL file for more details.
+
+USING FORTRANCL
+===============
+
+To use FortranCL in a Fortran program you need to include the 'cl'
+module (i.e. add the 'use cl' statement to your code). You might need
+to tell your compiler to look for modules files in <prefix>/include
+(where <prefix> is the FortranCL installation directory, /usr/local by
+default).
+
+To link you have to add "-L<prefix>/lib -lfortrancl -lOpenCL" to the
+link command, replacing <prefix> by the FortranCL installation
+directory.
+
+This is a single file compilation example assuming FortranCL was
+installed in /usr/local:
+
+gfortran prog.f90 -o prog -I/usr/local/include -L/usr/local/lib -lfortrancl -lOpenCL
+
+See the example.f90 file for an example on how to use FortranCL to
+write an OpenCL program.
+
+FORTRANCL INTERFACE
+===================
+
+The interface of FortranCL is designed to be as close as possible to
+the C OpenCL interface as possible, but taking advantage of Fortran
+features like polymorphism. It was originally written for the
+integration of OpenCL in the Octopus code
+(http://tddft.org/programs/octopus/).
+
+Many calls are missing, but the interface is complete enough to write
+a full OpenCL code in Fortran.
+
+This is an alpha release, our aim is to keep the interface unchanged
+ for future releases but this is not guaranteed.
