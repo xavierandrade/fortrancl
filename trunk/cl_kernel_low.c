@@ -102,11 +102,15 @@ void FC_FUNC_(clkernelworkgroupinfo_int64, CLKERNELWORKGROUPINFO_int64)
 
   switch(*param_name){
   case CL_KERNEL_WORK_GROUP_SIZE:
+#ifdef CL_VERSION_1_1
   case CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE:
+#endif
     *param_value = rval.val_size_t;
     break;
   case CL_KERNEL_LOCAL_MEM_SIZE:
+#ifdef CL_VERSION_1_1
   case CL_KERNEL_PRIVATE_MEM_SIZE:
+#endif
     *param_value = rval.val_ulong;
     break;
   default:
