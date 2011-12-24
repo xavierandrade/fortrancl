@@ -1,4 +1,4 @@
-= Types =
+= Datatypes =
 
 = CL interface functions =
 
