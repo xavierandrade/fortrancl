@@ -16,10 +16,7 @@ The following are Fortran datatypes that directly map to OpenCL C types.
   * cl_program
   * cl_sampler
 
-The following C CL types are mapped to Fortran integers:
-
-  * cl_device_type
-  * cl_bool
+The OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/enums.html enumerated types] are mapped to Fortran integers.
 
 = CL interface procedures =
 
