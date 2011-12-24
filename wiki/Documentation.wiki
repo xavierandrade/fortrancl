@@ -6,4 +6,4 @@ Currently the best way to learn how to use OpenCL is to look at the source code 
   * [http://code.google.com/p/fortrancl/source/browse/trunk/examples/devices.f90 devices.f90]: Gives a list of all system CL devices.
 
 
-You can also check the incomplete [Reference|reference] manual
+You can also check the incomplete [Reference] manual
