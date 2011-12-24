@@ -4,3 +4,6 @@ Currently the best way to learn how to use OpenCL is to look at the source code 
 
   * [http://code.google.com/p/fortrancl/source/browse/trunk/examples/sum.f90 sum.f90]: Calculated the sum of two vectors using FortranCL (requires [http://code.google.com/p/fortrancl/source/browse/trunk/examples/sum.cl sum.cl]).
   * [http://code.google.com/p/fortrancl/source/browse/trunk/examples/devices.f90 devices.f90]: Gives a list of all system CL devices.
+
+
+[Reference] manual
