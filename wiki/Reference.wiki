@@ -1,0 +1,8 @@
+= Types =
+
+= CL interface functions =
+
+  * [clGetDeviceInfo]
+
+= Additional functions =
+  * [cl_bool]
