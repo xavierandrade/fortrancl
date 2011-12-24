@@ -22,7 +22,7 @@ The OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/enums.html
 
 These are the functions or subroutines from FortranCL that correspond to OpenCL functions.
 
-All procedures return as last argument an `integer`. If this value is `CL_SUCCESS`, the call was successful, otherwise the value indicate the error.
+The last argument of all procedures is the `integer` errcode_ret. If the output value is `CL_SUCCESS`, the call was successful, otherwise the value indicate the error.
 
   * [clBuildProgram]
   * [clCreateBuffer]
