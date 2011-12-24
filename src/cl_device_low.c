@@ -69,10 +69,11 @@ void FC_FUNC_(clgetdeviceinfo_str, CLGETDEVICEINFO_STR)
 void FC_FUNC_(clgetdeviceinfo_int64, CLGETDEVICEINFO_INT64)
      (const cl_device_id * device, const int * param_name, cl_long * param_value, int * status){
   union { 
-    cl_uint  val_uint;
-    cl_bool  val_bool;
-    cl_ulong val_ulong;
-    size_t   val_size_t;
+    cl_uint        val_uint;
+    cl_bool        val_bool;
+    cl_ulong       val_ulong;
+    size_t         val_size_t;
+    cl_device_type val_cl_device_type;
   } rval;
   
   *status = (int) clGetDeviceInfo(*device, (cl_device_info) *param_name, sizeof(rval), &rval, NULL);
@@ -145,9 +146,14 @@ void FC_FUNC_(clgetdeviceinfo_int64, CLGETDEVICEINFO_INT64)
     *param_value = rval.val_bool;
     break;
 
+    /* return cl_device_type */
+  case CL_DEVICE_TYPE:
+    *param_value = rval.val_cl_device_type;
+    break;
+
   /* other */
   default:
-    fprintf(stderr, "\nFortranCL error: clGetDeviceInfo not implemented param_name.\n");
+    fprintf(stderr, "\nFortranCL error: clGetDeviceInfo not implemented param_name (%x).\n", *param_name);
     exit(1);
     break;
   }
