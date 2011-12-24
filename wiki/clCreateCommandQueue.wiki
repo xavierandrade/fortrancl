@@ -12,4 +12,4 @@ type(cl_context) function clCreateContext(platform, devices, errcode_ret)
 end function clCreateContext
 </code>
 
-The devices argument can be a scalar or an array. The number of components is given by the array size.
+The `devices` argument can be a scalar or an array. The number of components is given by the array size.
