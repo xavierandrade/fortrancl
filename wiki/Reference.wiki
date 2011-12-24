@@ -1,3 +1,7 @@
+= Modules =
+
+All the FortranCL interface is contained in the <tt>cl</tt> Fortran 90 module.
+
 = Datatypes =
 
 The following are Fortran datatypes that directly map to CL C types.
@@ -25,6 +29,7 @@ All procedures return as last argument an <tt>integer</tt>. If this value is CL_
 
   * [clEnqueueReadBuffer]
   * [clEnqueueWriteBuffer]
+  * [clGetPlatformInfo]
   * [clGetDeviceInfo]
   * [clKernelSetArg]
   * [clKernelSetArgLocal]
