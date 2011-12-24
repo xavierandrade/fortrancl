@@ -1,5 +1,7 @@
 = Datatypes =
 
+The following are Fortran datatypes that directly map to CL C types.
+
   * cl_command_queue
   * cl_context
   * cl_device_id
