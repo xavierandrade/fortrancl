@@ -1,5 +1,15 @@
 = Datatypes =
 
+  * cl_command_queue
+  * cl_context
+  * cl_device_id
+  * cl_event
+  * cl_kernel
+  * cl_mem
+  * cl_platform_id
+  * cl_program
+  * cl_sampler
+
 = CL interface functions =
 
   * [clEnqueueReadBuffer]
