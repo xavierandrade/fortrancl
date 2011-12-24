@@ -1,3 +1,10 @@
+Builds (compiles and links) a program executable from the program source or binary.
 Interface to the OpenCL function [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clBuildProgram.html clBuildProgram].
 
-Builds (compiles and links) a program executable from the program source or binary. 
+<code language="Fortran">
+subroutine clBuildProgram(program, options, errcode_ret)
+  type(cl_program),   intent(inout) :: program
+  character(len=*),   intent(in)    :: options
+  integer,            intent(in)    :: errcode_ret
+end subroutine clBuildProgram
+</code>
