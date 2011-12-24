@@ -26,6 +26,8 @@ All procedures return as last argument an <tt>integer</tt>. If this value is CL_
   * [clEnqueueReadBuffer]
   * [clEnqueueWriteBuffer]
   * [clGetDeviceInfo]
+  * [clKernelSetArg]
+  * [clKernelSetArgLocal]
 
 = Additional functions =
   * [cl_bool]: Returns a CL boolean value, CL_TRUE or CL_FALSE, from a Fortran logical.
