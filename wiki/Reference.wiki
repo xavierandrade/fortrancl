@@ -1,20 +1,20 @@
 = Modules =
 
-All the FortranCL interface is contained in the <tt>cl</tt> Fortran 90 module.
+All the FortranCL interface is contained in the `cl` Fortran 90 module.
 
 = Datatypes =
 
 The following are Fortran datatypes that directly map to OpenCL C types.
 
-  * cl_command_queue
-  * cl_context
-  * cl_device_id
-  * cl_event
-  * cl_kernel
-  * cl_mem
-  * cl_platform_id
-  * cl_program
-  * cl_sampler
+  * `cl_command_queue`
+  * `cl_context`
+  * `cl_device_id`
+  * `cl_event`
+  * `cl_kernel`
+  * `cl_mem`
+  * `cl_platform_id`
+  * `cl_program`
+  * `cl_sampler`
 
 The OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/enums.html enumerated types] are mapped to Fortran integers.
 
@@ -22,7 +22,7 @@ The OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/enums.html
 
 These are the functions or subroutines from FortranCL that correspond to OpenCL functions.
 
-All procedures return as last argument an <tt>integer</tt>. If this value is CL_SUCCESS, the call was successful, otherwise the value indicate the error.
+All procedures return as last argument an `integer`. If this value is `CL_SUCCESS`, the call was successful, otherwise the value indicate the error.
 
   * [clBuildProgram]
   * [clCreateBuffer]
