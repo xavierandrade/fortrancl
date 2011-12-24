@@ -17,6 +17,12 @@
 ##
 ## $Id$
 
-SUBDIRS = src examples
+noinst_PROGRAMS = sum
+
+sum_SOURCES = sum.f90
+sum_LDADD = $(top_builddir)/libfortrancl.a
+dist_noinst_DATA = sum.cl
+
+AM_FCFLAGS = @F90_MODULE_FLAG@$(top_builddir)/src
 
 CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc*
