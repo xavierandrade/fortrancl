@@ -1,3 +1,4 @@
+#labels Procedures
 Creates a buffer object. 
 
 Interface to OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateBuffer.html clCreateBuffer] function.
