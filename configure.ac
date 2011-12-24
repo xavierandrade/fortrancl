@@ -16,7 +16,7 @@
 ## $Id$
 
 AC_INIT([FortranCL],[0.1alpha1],[xavier@tddft.org],[fortrancl])
-AC_CONFIG_SRCDIR([cl.f90])
+AC_CONFIG_SRCDIR([src/cl.f90])
 AM_INIT_AUTOMAKE
 
 AC_CONFIG_HEADERS([config.h])
@@ -73,5 +73,6 @@ AC_SUBST(ax_cv_f90_modext)
 AM_CONDITIONAL(F90_MOD_UPPERCASE, [test x$ax_f90_mod_uppercase = xyes])
 
 AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([src/Makefile])
 
 AC_OUTPUT
