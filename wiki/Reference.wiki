@@ -12,7 +12,16 @@ The following are Fortran datatypes that directly map to CL C types.
   * cl_program
   * cl_sampler
 
-= CL interface functions =
+The following C CL types are mapped to Fortran integers:
+
+  * cl_device_type
+  * cl_bool
+
+= CL interface procedures =
+
+These are the functions or subroutines from FortranCL that correspond to C CL functions.
+
+All procedures return as last argument an <tt>integer</tt>. If this value is CL_SUCCESS, the call was successful, otherwise the value indicate the error.
 
   * [clEnqueueReadBuffer]
   * [clEnqueueWriteBuffer]
