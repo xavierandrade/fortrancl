@@ -24,12 +24,27 @@ These are the functions or subroutines from FortranCL that correspond to OpenCL 
 
 All procedures return as last argument an <tt>integer</tt>. If this value is CL_SUCCESS, the call was successful, otherwise the value indicate the error.
 
+  * [clBuildProgram]
+  * [clCreateBuffer]
+  * [clCreateContext]
+  * [clCreateKernel]
+  * [clCreateProgramWithSource]
+  * [clEnqueueNDRangeKernel]
   * [clEnqueueReadBuffer]
   * [clEnqueueWriteBuffer]
-  * [clGetPlatformInfo]
+  * [clFinish]
+  * [clGetDeviceIDs]
   * [clGetDeviceInfo]
+  * [clGetPlatformIDs]
+  * [clGetPlatformInfo]
+  * [clGetProgramBuildInfo]
   * [clKernelSetArg]
   * [clKernelSetArgLocal]
+  * [clKernelWorkGroupInfo]
+  * [clReleaseContext]
+  * [clReleaseKernel]
+  * [clReleaseMemObject]
+  * [clReleaseProgram]
 
 = Additional functions =
   * [cl_bool]: Returns a CL boolean value, CL_TRUE or CL_FALSE, from a Fortran logical.
