@@ -5,3 +5,5 @@ integer pure function cl_bool(val)
   logical, intent(in) :: val
 end function
 }}}
+
+Back to [Reference] manual.
