@@ -42,6 +42,7 @@ The last argument of all procedures is the `integer` errcode_ret. If the output 
   * [clKernelSetArg]
   * [clKernelSetArgLocal]
   * [clKernelWorkGroupInfo]
+  * [clReleaseCommandQueue]
   * [clReleaseContext]
   * [clReleaseKernel]
   * [clReleaseMemObject]
