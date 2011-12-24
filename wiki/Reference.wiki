@@ -2,7 +2,9 @@
 
 = CL interface functions =
 
+  * [clEnqueueReadBuffer]
+  * [clEnqueueWriteBuffer]
   * [clGetDeviceInfo]
 
 = Additional functions =
-  * [cl_bool]
+  * [cl_bool]: Returns a CL boolean value, CL_TRUE or CL_FALSE, from a Fortran logical.
