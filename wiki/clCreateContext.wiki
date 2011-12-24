@@ -1,0 +1,5 @@
+Creates an OpenCL context.
+
+Interface to OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateContext.html clCreateContext].
+
+=== Interfaces ===
