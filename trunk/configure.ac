@@ -68,11 +68,15 @@ acx_save_libs="${LIBS}"
 LIBS="${FCEXTRALIBS} $FCLIBS"
 
 AX_F90_MODULE_EXTENSION
+AX_F90_MODULE_FLAG
+F90_MODULE_FLAG=$ax_cv_f90_modflag
+AC_SUBST([F90_MODULE_FLAG])
 
 AC_SUBST(ax_cv_f90_modext)
 AM_CONDITIONAL(F90_MOD_UPPERCASE, [test x$ax_f90_mod_uppercase = xyes])
 
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([src/Makefile])
+AC_CONFIG_FILES([examples/Makefile])
 
 AC_OUTPUT

@@ -51,12 +51,6 @@ libfortrancl_a_SOURCES +=            \
 noinst_HEADERS =               \
 	string_f.h
 
-noinst_PROGRAMS = example
-
-example_SOURCES = example.f90
-example_LDADD = libfortrancl.a
-dist_noinst_DATA = sum.cl
-
 cl_types.o     : cl_types.f90 
 cl_constants.o : cl_constants.f90
 cl_platform.o  : cl_platform.f90 cl_types.o 
