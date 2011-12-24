@@ -1,6 +1,10 @@
 Builds (compiles and links) a program executable from the program source or binary.
 Interface to the OpenCL function [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clBuildProgram.html clBuildProgram].
 
+=== Interfaces ===
+
+The following interface does not take any device argument, so it builds the program for all the associated devices.
+
 <code language="Fortran">
 subroutine clBuildProgram(program, options, errcode_ret)
   type(cl_program),   intent(inout) :: program
@@ -8,3 +12,5 @@ subroutine clBuildProgram(program, options, errcode_ret)
   integer,            intent(in)    :: errcode_ret
 end subroutine clBuildProgram
 </code>
+
+TODO: An interface that receives an array of devices is missing.
