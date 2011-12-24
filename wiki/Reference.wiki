@@ -26,6 +26,7 @@ All procedures return as last argument an `integer`. If this value is `CL_SUCCES
 
   * [clBuildProgram]
   * [clCreateBuffer]
+  * [clCreateCommandQueue]
   * [clCreateContext]
   * [clCreateKernel]
   * [clCreateProgramWithSource]
