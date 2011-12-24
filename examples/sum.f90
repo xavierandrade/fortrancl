@@ -17,7 +17,7 @@
 !!
 !! $Id$
 
-program example
+program sum
   use cl
 
   implicit none
@@ -138,4 +138,4 @@ program example
   call clReleaseCommandQueue(command_queue, ierr)
   call clReleaseContext(context, ierr)
 
-end program example
+end program sum
