@@ -17,11 +17,14 @@
 ##
 ## $Id$
 
-noinst_PROGRAMS = sum
+noinst_PROGRAMS = sum devices
 
 sum_SOURCES = sum.f90
-sum_LDADD = $(top_builddir)/libfortrancl.a
+sum_LDADD = $(top_builddir)/src/libfortrancl.a
 dist_noinst_DATA = sum.cl
+
+devices_SOURCES = devices.f90
+devices_LDADD = $(top_builddir)/src/libfortrancl.a
 
 AM_FCFLAGS = @F90_MODULE_FLAG@$(top_builddir)/src
 
