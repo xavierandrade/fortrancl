@@ -27,7 +27,7 @@ module cl_kernel_m
   public ::                          &
     clCreateKernel,                  &
     clReleaseKernel,                 &
-    clKernelWorkGroupInfo,           &
+    clGetKernelWorkGroupInfo,           &
     clSetKernelArgLocal,             &
     clSetKernelArg
 
@@ -119,9 +119,9 @@ module cl_kernel_m
 
   ! ----------------------------------------------------
 
-  interface clKernelWorkGroupInfo
+  interface clGetKernelWorkGroupInfo
 
-    subroutine clkernelworkgroupinfo_int64(kernel, device, param_name, param_value, errcode_ret)
+    subroutine clgetkernelworkgroupinfo_int64(kernel, device, param_name, param_value, errcode_ret)
       use cl_types_m
       
       implicit none
@@ -131,9 +131,9 @@ module cl_kernel_m
       integer,            intent(in)    :: param_name
       integer(8),         intent(out)   :: param_value
       integer,            intent(out)   :: errcode_ret
-    end subroutine clkernelworkgroupinfo_int64
+    end subroutine clgetkernelworkgroupinfo_int64
 
-  end interface clKernelWorkGroupInfo
+  end interface clGetKernelWorkGroupInfo
 
   ! ----------------------------------------------------
 

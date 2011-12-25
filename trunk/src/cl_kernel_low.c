@@ -88,7 +88,7 @@ void FC_FUNC_(clsetkernelarglocal_low, CLSETKERNELARGLOCAL_LOW)
 
 /* -----------------------------------------------------------------------*/
 
-void FC_FUNC_(clkernelworkgroupinfo_int64, CLKERNELWORKGROUPINFO_int64)
+void FC_FUNC_(clgetkernelworkgroupinfo_int64, CLGETKERNELWORKGROUPINFO_int64)
      (cl_kernel * kernel, cl_device_id * device, int * param_name, cl_long * param_value, int * retcode_err){
 
   union {
