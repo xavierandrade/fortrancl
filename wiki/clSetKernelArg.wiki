@@ -1,7 +1,7 @@
 #labels Procedures
 Used to set the argument value for a specific argument of a kernel. 
 
-Interface [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clSetKernelArg.html clSetKernelArg].
+Interface to OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clSetKernelArg.html clSetKernelArg].
 
 === Interfaces ===
 
