@@ -28,4 +28,5 @@ devices_LDADD = $(top_builddir)/src/libfortrancl.a
 
 AM_FCFLAGS = @F90_MODULE_FLAG@$(top_builddir)/src
 
-CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc*
+CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc* $(noinst_PROGRAMS)
+
