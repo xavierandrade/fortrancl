@@ -30,6 +30,13 @@ subroutine clGetDeviceInfo(device, param_name, param_value, errcode_ret)
       integer(8),         intent(out)  :: param_value
       integer,            intent(out)  :: errcode_ret
 end subroutine clGetDeviceInfo
+
+subroutine clGetDeviceInfo(device, param_name, param_value, errcode_ret)
+      type(cl_device_id), intent(in)   :: device
+      integer,            intent(in)   :: param_name
+      logical,            intent(out)  :: param_value
+      integer,            intent(out)  :: errcode_ret
+end subroutine clGetDeviceInfo
 </code>
 
 Note that for numerical values you can use both the `integer` and `integer(8)` interfaces. However, in some cases an `integer` value might be overflowed.
