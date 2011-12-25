@@ -98,14 +98,14 @@ contains
   
   ! -----------------------------------
 
-  type(cl_context) function clCreateContext_single(platform, device, errcode_ret) result(context)
+  type(cl_context) function clCreateContext_single(platform, devices, errcode_ret) result(context)
     type(cl_platform_id), intent(in)   :: platform
-    type(cl_device_id),   intent(in)   :: device
+    type(cl_device_id),   intent(in)   :: devices
     integer,              intent(out)  :: errcode_ret
 
     type(cl_device_id) :: devs(1:1)
 
-    devs(1:1) = device
+    devs(1:1) = devices
     context = clCreateContext_nocallback(platform, devs, errcode_ret)
 
   end function clCreateContext_single
