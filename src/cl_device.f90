@@ -143,17 +143,17 @@ contains
 
   ! ----------------------------------------------------------
 
-  subroutine clgetdeviceids_single(platform, device_type, device, num_devices, errcode_ret)
+  subroutine clgetdeviceids_single(platform, device_type, devices, num_devices, errcode_ret)
     type(cl_platform_id), intent(in)   :: platform
     integer,              intent(in)   :: device_type
-    type(cl_device_id),   intent(out)  :: device
+    type(cl_device_id),   intent(out)  :: devices
     integer,              intent(out)  :: num_devices
     integer,              intent(out)  :: errcode_ret
 
     type(cl_device_id) :: devs(1:1)
     
     call clgetdeviceids_list(platform, device_type, devs, num_devices, errcode_ret)
-    device = devs(1)
+    devices = devs(1)
 
   end subroutine clgetdeviceids_single
 
