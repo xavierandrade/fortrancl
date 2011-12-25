@@ -39,14 +39,14 @@ The last argument of all procedures is the `integer` errcode_ret. If the output 
   * [clGetPlatformIDs]
   * [clGetPlatformInfo]
   * [clGetProgramBuildInfo]
-  * [clKernelSetArg]
-  * [clKernelSetArgLocal]
   * [clKernelWorkGroupInfo]
   * [clReleaseCommandQueue]
   * [clReleaseContext]
   * [clReleaseKernel]
   * [clReleaseMemObject]
   * [clReleaseProgram]
+  * [clSetKernelArg]
+  * [clSetKernelArgLocal]
 
 = Additional functions =
   * [cl_bool]: Returns a CL boolean value, CL_TRUE or CL_FALSE, from a Fortran logical.
