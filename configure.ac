@@ -55,9 +55,10 @@ AC_PROG_FC([], Fortran 90)
 if test x"$FC" = x; then
   AC_MSG_ERROR([could not find Fortran 90 compiler])
 fi
+
+acx_save_fcflags="${FCFLAGS}"
 AC_LANG_PUSH(Fortran)
 AC_FC_SRCEXT(f90)
-
 FCFLAGS="${acx_save_fcflags}"
 
 ACX_FCFLAGS
