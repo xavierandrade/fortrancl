@@ -5,6 +5,8 @@ Interface to OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/c
 
 === Interfaces ===
 
+This interface receives a single string (with the `string` argument) with the program source code.
+
 <code language="Fortran">
 type(cl_program) function clCreateProgramWithSource(context, string, errcode_ret)
   type(cl_context), intent(inout) :: context
