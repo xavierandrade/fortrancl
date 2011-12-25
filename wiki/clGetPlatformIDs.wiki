@@ -14,7 +14,7 @@ subroutine clGetPlatformIDs(num_platforms, errcode_ret)
 end subroutine clGetPlatformIDs
 </code>
 
-This interface returns a list of platforms. The `platforms` argument can also be a scalar.
+This interface returns a list of platforms. The `platforms` argument can be a one-dimensional array or a scalar.
 
 <code language="Fortran">
 subroutine clGetPlatformIDs(platforms, num_platforms, errcode_ret)
