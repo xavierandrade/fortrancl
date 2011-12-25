@@ -13,3 +13,13 @@ subroutine clGetPlatformIDs(num_platforms, errcode_ret)
   integer,              intent(out)  :: errcode_ret
 end subroutine clGetPlatformIDs
 </code>
+
+This interface returns a list of platforms. The `platforms` argument can also be a scalar.
+
+<code language="Fortran">
+subroutine clGetPlatformIDs(platforms, num_platforms, errcode_ret)
+  type(cl_platform_id), intent(out)  :: platforms(:)
+  integer,              intent(out)  :: num_platforms
+  integer,              intent(out)  :: errcode_ret
+end subroutine clGetPlatformIDs
+</code>
