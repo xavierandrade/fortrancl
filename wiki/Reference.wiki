@@ -39,7 +39,7 @@ The last argument of all procedures is the `integer` errcode_ret. If the output 
   * [clGetPlatformIDs]
   * [clGetPlatformInfo]
   * [clGetProgramBuildInfo]
-  * [clKernelWorkGroupInfo]
+  * [clGetKernelWorkGroupInfo]
   * [clReleaseCommandQueue]
   * [clReleaseContext]
   * [clReleaseKernel]
