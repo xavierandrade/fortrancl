@@ -1,6 +1,6 @@
 This is the documentation for FortranCL.
 
-Currently the best way to learn how to use OpenCL is to look at the source code examples:
+Currently, the best way to learn how to use OpenCL is to look at the source code examples:
 
   * [http://code.google.com/p/fortrancl/source/browse/trunk/examples/sum.f90 sum.f90]: Calculates the sum of two vectors using FortranCL (requires [http://code.google.com/p/fortrancl/source/browse/trunk/examples/sum.cl sum.cl]).
   * [http://code.google.com/p/fortrancl/source/browse/trunk/examples/devices.f90 devices.f90]: Gives a list of all system CL devices.
