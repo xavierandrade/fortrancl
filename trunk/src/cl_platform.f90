@@ -112,15 +112,15 @@ contains
 
   end subroutine clgetplatformids_list
 
-  subroutine clgetplatformids_single(platform, num_platforms, errcode_ret)
-    type(cl_platform_id), intent(out)  :: platform
+  subroutine clgetplatformids_single(platforms, num_platforms, errcode_ret)
+    type(cl_platform_id), intent(out)  :: platforms
     integer,              intent(out)  :: num_platforms
     integer,              intent(out)  :: errcode_ret
 
     type(cl_platform_id) :: plats(1:1)
 
     call clgetplatformids_list(plats, num_platforms, errcode_ret)
-    platform = plats(1)
+    platforms = plats(1)
   end subroutine clgetplatformids_single
 
 end module cl_platform_m
