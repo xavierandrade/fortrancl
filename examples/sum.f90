@@ -119,7 +119,7 @@ program sum
   call clSetKernelArg(kernel, 2, cl_vec2, ierr)
 
   ! get the localsize for the kernel (note that the sizes are integer(8) variable)
-  call clKernelWorkGroupInfo(kernel, device, CL_KERNEL_WORK_GROUP_SIZE, localsize, ierr)
+  call clGetKernelWorkGroupInfo(kernel, device, CL_KERNEL_WORK_GROUP_SIZE, localsize, ierr)
   globalsize = int(size, 8)
   if(mod(size, localsize) /= 0) globalsize = globalsize + localsize - mod(size, localsize) 
 
