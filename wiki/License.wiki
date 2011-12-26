@@ -1,0 +1,1 @@
+FortranCL is released under the [http://www.gnu.org/licenses/lgpl.html LGPL 3.0 license]. This means that, in principle, any code can use FortranCL, there are no license restrictions.
