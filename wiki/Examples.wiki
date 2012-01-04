@@ -1,4 +1,4 @@
-Currently, the best way to learn how to use FortranCL is to look at the source code examples:
+These are some example programs that use FortranCL:
 
   * [http://code.google.com/p/fortrancl/source/browse/trunk/examples/sum.f90 sum.f90]: Calculates the sum of two vectors using FortranCL (requires [http://code.google.com/p/fortrancl/source/browse/trunk/examples/sum.cl sum.cl]).
   * [http://code.google.com/p/fortrancl/source/browse/trunk/examples/devices.f90 devices.f90]: Gives a list of all system CL devices.
