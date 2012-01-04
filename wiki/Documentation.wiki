@@ -1,5 +1,5 @@
 This is the documentation for FortranCL.
 
-Currently, the best way to learn how to use FortranCL is to look at the source code [examples].
+Currently, the best way to learn how to use FortranCL is to look at the source code [Examples].
 
 You can also check the [Reference] manual for the specific documentation of FortranCL procedures.
