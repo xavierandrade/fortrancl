@@ -1,4 +1,4 @@
-* Can I use FortranCL to use a GPU from my Fortran code?
+* Can I use FortranCL to run my Fortran code on a GPU?
 
 Yes, you just need FortranCL and a OpenCL capable GPU (for example a recent graphics card from AMD or Nvidia).
 
