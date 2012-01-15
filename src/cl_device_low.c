@@ -20,7 +20,7 @@
 #include <config.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <CL/cl.h>
+#include "localcl.h"
 
 #include <string_f.h>
 
