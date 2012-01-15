@@ -46,11 +46,19 @@ AC_C_CONST
 # Checks for library functions.
 AC_PROG_GCC_TRADITIONAL
 AC_FUNC_STAT
-ACX_CL
+AX_CHECK_CL
+
+if test "X$no_cl" = "Xyes"; then
+  AC_MSG_FAILURE([You need OpenCL])
+fi
+
+CFLAGS="$CFLAGS $CL_CFLAGS"
+LIBS="$LIBS $CL_LIBS"
+
 AC_PROG_FC([], Fortran 90)
 
 if test x"$FC" = x; then
-  AC_MSG_ERROR([could not find Fortran 90 compiler])
+  AC_MSG_ERROR([Cannot find the OpenCL library.])
 fi
 
 acx_save_fcflags="${FCFLAGS}"
