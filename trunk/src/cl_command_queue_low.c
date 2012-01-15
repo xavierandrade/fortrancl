@@ -1,5 +1,5 @@
 /*
-** Copyright (C) 2010-2011 X. Andrade <xavier@tddft.org>
+** Copyright (C) 2010-2012 X. Andrade <xavier@tddft.org>
 ** 
 ** FortranCL is free software: you can redistribute it and/or modify
 ** it under the terms of the GNU Lesser General Public License as published by
