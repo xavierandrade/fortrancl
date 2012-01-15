@@ -46,10 +46,7 @@ AC_C_CONST
 # Checks for library functions.
 AC_PROG_GCC_TRADITIONAL
 AC_FUNC_STAT
-AC_CHECK_HEADER(CL/cl.h, [], [AC_MSG_ERROR([Cannot find the OpenCL header.])], [])
-AC_CHECK_FUNC(clGetPlatformIDs, [], [LIBS=$LIBS" -lOpenCL"])
-AC_CHECK_FUNC(clFinish, [], [AC_MSG_ERROR([Cannot find the OpenCL library.])])
-
+ACX_CL
 AC_PROG_FC([], Fortran 90)
 
 if test x"$FC" = x; then
