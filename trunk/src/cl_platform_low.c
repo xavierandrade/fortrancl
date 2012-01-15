@@ -18,7 +18,7 @@
 */
 
 #include <config.h>
-#include <CL/cl.h>
+#include "localcl.h"
 
 #include <string_f.h>
 
