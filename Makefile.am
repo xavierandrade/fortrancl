@@ -20,6 +20,8 @@
 ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = src examples
+CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc ifc*
 
-CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc*
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = fortrancl.pc
 
