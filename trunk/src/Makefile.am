@@ -23,11 +23,12 @@ else
   LIBFUNCMOD = cl.@ax_cv_f90_modext@
 endif
 
-nodist_include_HEADERS = $(LIBFUNCMOD)
+fortrancl_includedir = $(includedir)
+nodist_fortrancl_include_HEADERS = $(LIBFUNCMOD)
 
-lib_LIBRARIES = libfortrancl.a
+lib_LTLIBRARIES = libfortrancl.la
 
-libfortrancl_a_SOURCES =       \
+libfortrancl_la_SOURCES =       \
 	cl_types.f90           \
 	cl_buffer.f90          \
 	cl_command_queue.f90   \
@@ -39,7 +40,7 @@ libfortrancl_a_SOURCES =       \
 	cl_program.f90         \
 	cl.f90
 
-libfortrancl_a_SOURCES +=            \
+libfortrancl_la_SOURCES +=            \
 	cl_buffer_low.c              \
 	cl_command_queue_low.c       \
 	cl_context_low.c             \
@@ -51,15 +52,17 @@ libfortrancl_a_SOURCES +=            \
 noinst_HEADERS =               \
 	string_f.h
 
-cl_types.o     : cl_types.f90 
-cl_constants.o : cl_constants.f90
-cl_platform.o  : cl_platform.f90 cl_types.o 
-cl_program.o   : cl_program.f90 cl_types.o 
-cl_kernel.o    : cl_kernel.f90 cl_types.o 
-cl_device.o    : cl_device.f90 cl_types.o 
-cl_context.o   : cl_context.f90 cl_types.o 
-cl_command_queue.o : cl_command_queue.f90 cl_types.o 
-cl_buffer.o    : cl_buffer.f90  cl_types.o 
-cl.o : cl.f90 cl_constants.o cl_types.o cl_device.o cl_kernel.o cl_program.o cl_platform.o cl_context.o cl_command_queue.o cl_buffer.o
+$(LIBFUNCMOD):   cl.lo
+
+cl_types.lo     : cl_types.f90 
+cl_constants.lo : cl_constants.f90
+cl_platform.lo  : cl_platform.f90 cl_types.lo 
+cl_program.lo   : cl_program.f90 cl_types.lo 
+cl_kernel.lo    : cl_kernel.f90 cl_types.lo 
+cl_device.lo    : cl_device.f90 cl_types.lo 
+cl_context.lo   : cl_context.f90 cl_types.lo 
+cl_command_queue.lo : cl_command_queue.f90 cl_types.lo 
+cl_buffer.lo    : cl_buffer.f90  cl_types.lo 
+cl.lo : cl.f90 cl_constants.lo cl_types.lo cl_device.lo cl_kernel.lo cl_program.lo cl_platform.lo cl_context.lo cl_command_queue.lo cl_buffer.lo
 
 CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc*

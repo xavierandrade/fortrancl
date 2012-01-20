@@ -32,10 +32,15 @@ AC_CANONICAL_HOST
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_PROG_RANLIB
 AC_PROG_YACC
 
 AC_PROG_CC
+LT_INIT([disable-shared])
+
+# Set proper version
+# http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
+AC_SUBST([FORTRANCL_SO_VERSION], [0:0:0])
+#AC_SUBST([FORTRANCL_API_VERSION], [1.1])   # set to proper API OpenCL version
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -81,8 +86,9 @@ AC_SUBST([F90_MODULE_FLAG])
 AC_SUBST(ax_cv_f90_modext)
 AM_CONDITIONAL(F90_MOD_UPPERCASE, [test x$ax_f90_mod_uppercase = xyes])
 
-AC_CONFIG_FILES([Makefile])
-AC_CONFIG_FILES([src/Makefile])
-AC_CONFIG_FILES([examples/Makefile])
+AC_CONFIG_FILES([Makefile
+                 src/Makefile
+                 examples/Makefile
+                 fortrancl.pc])
 
 AC_OUTPUT
