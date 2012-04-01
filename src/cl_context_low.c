@@ -22,7 +22,7 @@
 
 /* -----------------------------------------------------------------------*/
 
-void FC_FUNC(clreleasecontext_low, CLRELEASECONTEXT_LOW)(cl_context * context, int * status){
+void FC_FUNC_(clreleasecontext_low, CLRELEASECONTEXT_LOW)(cl_context * context, int * status){
   *status = (int) clReleaseContext(*context);
 }
 
