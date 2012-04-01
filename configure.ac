@@ -15,7 +15,7 @@
 ##
 ## $Id$
 
-AC_INIT([FortranCL],[0.1alpha2],[xavier@tddft.org],[fortrancl])
+AC_INIT([FortranCL],[0.1alpha3],[xavier@tddft.org],[fortrancl])
 AC_CONFIG_SRCDIR([src/cl.f90])
 AM_INIT_AUTOMAKE
 
