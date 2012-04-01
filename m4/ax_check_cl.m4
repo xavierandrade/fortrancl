@@ -102,7 +102,7 @@ AC_LINK_IFELSE([AX_CHECK_CL_PROGRAM],
                                              [ax_cv_check_cl_libcl="$ax_try_lib $ax_check_cl_dylib_flag"; break])])])
 done
 
-AS_IF([test "X$ax_cv_check_cl_libcl" = Xno -a X$no_x = Xyes],
+AS_IF([test "X$ax_cv_check_cl_libcl" = Xno],
       [LIBS='-framework OpenCL'
       AC_LINK_IFELSE([AX_CHECK_CL_PROGRAM],
                      [ax_cv_check_cl_libcl=$LIBS])])
