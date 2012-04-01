@@ -33,6 +33,7 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_YACC
+AC_PROG_SED
 
 AC_PROG_CC
 LT_INIT([disable-shared])
@@ -51,6 +52,8 @@ AC_C_CONST
 # Checks for library functions.
 AC_PROG_GCC_TRADITIONAL
 AC_FUNC_STAT
+
+ACX_PTHREAD
 AX_CHECK_CL
 
 if test "X$no_cl" = "Xyes"; then
