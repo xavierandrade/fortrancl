@@ -52,7 +52,8 @@ libfortrancl_la_SOURCES +=            \
 	cl_program_low.c
 
 noinst_HEADERS =               \
-	string_f.h
+	string_f.h             \
+	localcl.h
 
 $(LIBFUNCMOD):   cl.lo
 
