@@ -23,7 +23,7 @@
 #include <string_f.h>
 
 
-void FC_FUNC(clgetplatformids_num, CLGETPLATFORMIDS_NUM)(int * num_platforms, int * status){
+void FC_FUNC_(clgetplatformids_num, CLGETPLATFORMIDS_NUM)(int * num_platforms, int * status){
   cl_uint ret_platform;
 
   *status = (int) clGetPlatformIDs(0, NULL, &ret_platform);
