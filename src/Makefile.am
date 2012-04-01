@@ -23,6 +23,8 @@ else
   LIBFUNCMOD = cl.@ax_cv_f90_modext@
 endif
 
+AM_CFLAGS= @CL_CFLAGS@
+
 fortrancl_includedir = $(includedir)
 nodist_fortrancl_include_HEADERS = $(LIBFUNCMOD)
 
