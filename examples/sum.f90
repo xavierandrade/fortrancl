@@ -121,7 +121,7 @@ program sum
   ! get the localsize for the kernel (note that the sizes are integer(8) variable)
   call clGetKernelWorkGroupInfo(kernel, device, CL_KERNEL_WORK_GROUP_SIZE, localsize, ierr)
   globalsize = int(size, 8)
-  if(mod(size, localsize) /= 0) globalsize = globalsize + localsize - mod(size, localsize) 
+  if(mod(globalsize, localsize) /= 0) globalsize = globalsize + localsize - mod(globalsize, localsize) 
 
   ! execute the kernel
   call clEnqueueNDRangeKernel(command_queue, kernel, (/globalsize/), (/localsize/), ierr)
