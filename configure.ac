@@ -66,7 +66,7 @@ LIBS="$LIBS $CL_LIBS"
 AC_PROG_FC([], Fortran 90)
 
 if test x"$FC" = x; then
-  AC_MSG_ERROR([Cannot find the OpenCL library.])
+  AC_MSG_ERROR([Cannot find a Fortran compiler.])
 fi
 
 acx_save_fcflags="${FCFLAGS}"
