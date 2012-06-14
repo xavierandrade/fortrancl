@@ -1,5 +1,5 @@
 #labels Procedures
-Used to set the argument value for a specific argument of a kernel of type `__local`. 
+Used to set the argument value for a specific argument of a kernel of type `__local`. The arg_size argument is the size in bytes of the local memory area you want to allocate.
 
 Fortan interface to [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clSetKernelArg.html clSetKernelArg].
 
