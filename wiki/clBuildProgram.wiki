@@ -11,7 +11,7 @@ The following interface does not take any device argument, so it builds the prog
 subroutine clBuildProgram(program, options, errcode_ret)
   type(cl_program),   intent(inout) :: program
   character(len=*),   intent(in)    :: options
-  integer,            intent(in)    :: errcode_ret
+  integer,            intent(out)   :: errcode_ret
 end subroutine clBuildProgram
 </code>
 
