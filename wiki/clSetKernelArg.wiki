@@ -27,4 +27,12 @@ subroutine clsetkernelarg(kernel, arg_index, arg_value, errcode_ret)
 end subroutine clsetkernelarg
 </code>
 
+This table contains the supported scalar arguments and the equivalent OpenCL language types. Other types are not supported.
+
+|| *Fortran type* || *Kernel type* ||
+|| integer(4)  || int          ||
+|| integer(8)  || long         ||
+|| real(4)     || float        ||
+|| real(8)     || double       ||
+
 For setting a `__local` type argument, use [clSetKernelArgLocal].
