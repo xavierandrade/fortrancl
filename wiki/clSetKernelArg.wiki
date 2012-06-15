@@ -16,7 +16,7 @@ subroutine clSetKernelArg(kernel, arg_index, arg_value, errcode_ret)
 end subroutine clSetKernelArg
 </code>
 
-This is the interface for passing scalar values (`real`, `real(8)`, `integer`):
+This is the interface for passing scalar values:
 
 <code language="Fortran">
 subroutine clsetkernelarg(kernel, arg_index, arg_value, errcode_ret)
