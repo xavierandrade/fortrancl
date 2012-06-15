@@ -61,6 +61,19 @@ module cl_kernel_m
 
     ! ----------------------------------------------------
 
+    subroutine clsetkernelarg_char(kernel, arg_index, arg_value, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_kernel), intent(inout) :: kernel
+      integer,         intent(in)    :: arg_index
+      character,       intent(in)    :: arg_value
+      integer,         intent(out)   :: errcode_ret
+    end subroutine clsetkernelarg_char
+
+    ! ----------------------------------------------------
+
     subroutine clsetkernelarg_int(kernel, arg_index, arg_value, errcode_ret)
       use cl_types_m
 
@@ -71,6 +84,19 @@ module cl_kernel_m
       integer(4),      intent(in)    :: arg_value
       integer,         intent(out)   :: errcode_ret
     end subroutine clsetkernelarg_int
+
+    ! ----------------------------------------------------
+
+    subroutine clsetkernelarg_long(kernel, arg_index, arg_value, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_kernel), intent(inout) :: kernel
+      integer,         intent(in)    :: arg_index
+      integer(8),      intent(in)    :: arg_value
+      integer,         intent(out)   :: errcode_ret
+    end subroutine clsetkernelarg_long
 
     ! ----------------------------------------------------
 
@@ -97,6 +123,32 @@ module cl_kernel_m
       real(8),         intent(in)    :: arg_value
       integer,         intent(out)   :: errcode_ret
     end subroutine clsetkernelarg_double
+
+    ! ---------------------------------------------------
+
+    subroutine clsetkernelarg_float2(kernel, arg_index, arg_value, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_kernel), intent(inout) :: kernel
+      integer,         intent(in)    :: arg_index
+      complex(4),      intent(in)    :: arg_value
+      integer,         intent(out)   :: errcode_ret
+    end subroutine clsetkernelarg_float2
+
+    ! ----------------------------------------------------
+
+    subroutine clsetkernelarg_double2(kernel, arg_index, arg_value, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_kernel), intent(inout) :: kernel
+      integer,         intent(in)    :: arg_index
+      complex(8),      intent(in)    :: arg_value
+      integer,         intent(out)   :: errcode_ret
+    end subroutine clsetkernelarg_double2
 
   end interface clSetKernelArg
 
