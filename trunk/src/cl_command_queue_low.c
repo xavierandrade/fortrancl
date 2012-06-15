@@ -71,7 +71,7 @@ void FC_FUNC_(clenqueuendrangekernel_low, CLENQUEUENDRANGEKERNEL_LOW)
 /* -----------------------------------------------------------------------*/
 
 /* clEnqueueWriteBuffer */
-void FC_FUNC(clenqueuewritebuffer, CLENQUEUEWRITEBUFFER)
+void FC_FUNC(clenqueuewritebufferimpl, CLENQUEUEWRITEBUFFERIMPL)
      (cl_command_queue * command_queue, cl_mem * buffer, const int * blocking_write, 
       const cl_long * offset, const cl_long * cb, const void * ptr, int * status){
 
@@ -83,7 +83,7 @@ void FC_FUNC(clenqueuewritebuffer, CLENQUEUEWRITEBUFFER)
 /* -----------------------------------------------------------------------*/
 
 /* clEnqueueReadBuffer */
-void FC_FUNC(clenqueuereadbuffer, CLENQUEUEREADBUFFER)
+void FC_FUNC(clenqueuereadbufferimpl, CLENQUEUEREADBUFFERIMPL)
      (cl_command_queue * command_queue, cl_mem * buffer, const int * blocking_read, 
       const cl_long * offset, const cl_long * cb, void * ptr, int * status){
 

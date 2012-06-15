@@ -27,16 +27,17 @@ module cl_command_queue_m
     clCreateCommandQueue,            &
     clReleaseCommandQueue,           &
     clEnqueueNDRangeKernel,          &
+    clEnqueueWriteBuffer,            &
+    clEnqueueReadBuffer,             &
     clFinish
-    !clEnqueueWriteBuffer
-    !clEnqueueReadBuffer
 
+  
   ! The following functions are not declared since they are
   ! polymorphic beyond the capabilities of Fortran. They can be
   ! called, but no type checking will be done by the compiler.
   
   !  interface
-  !    subroutine clEnqueueWriteBuffer(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+  !    subroutine clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
   !      type(cl_command_queue), intent(inout) :: command_queue
   !      type(cl_mem),           intent(inout) :: buffer
   !      integer,                intent(in)    :: blocking_write
@@ -44,9 +45,9 @@ module cl_command_queue_m
   !      integer(8),             intent(in)    :: cb
   !      type(any),              intent(inout) :: ptr
   !      integer,                intent(out)   :: errcode_ret
-  !    end subroutine clEnqueueWriteBuffer
+  !    end subroutine clEnqueueWriteBufferImpl
   
-  !    subroutine clEnqueueReadBuffer(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+  !    subroutine clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
   !      type(cl_command_queue), intent(inout) :: command_queue
   !      type(cl_mem),           intent(inout) :: buffer
   !      integer,                intent(in)    :: blocking_write
@@ -54,7 +55,7 @@ module cl_command_queue_m
   !      integer(8),             intent(in)    :: cb
   !      type(any),              intent(inout) :: ptr
   !      integer,                intent(out)   :: errcode_ret
-  !    end subroutine clEnqueueReadBuffer
+  !    end subroutine clEnqueueReadBufferImpl
   
   !  end interface
 
@@ -100,6 +101,28 @@ module cl_command_queue_m
   interface clCreateCommandQueue
     module procedure clCreateCommandQueue_full
   end interface clCreateCommandQueue
+
+  ! ---------------------------------------------------
+
+  interface clEnqueueWriteBuffer
+    module procedure clEnqueueWriteBuffer_integer4
+    module procedure clEnqueueWriteBuffer_integer8
+    module procedure clEnqueueWriteBuffer_real4
+    module procedure clEnqueueWriteBuffer_real8
+    module procedure clEnqueueWriteBuffer_complex4
+    module procedure clEnqueueWriteBuffer_complex8
+  end interface clEnqueueWriteBuffer
+
+  ! ---------------------------------------------------
+
+  interface clEnqueueReadBuffer
+    module procedure clEnqueueReadBuffer_integer4
+    module procedure clEnqueueReadBuffer_integer8
+    module procedure clEnqueueReadBuffer_real4
+    module procedure clEnqueueReadBuffer_real8
+    module procedure clEnqueueReadBuffer_complex4
+    module procedure clEnqueueReadBuffer_complex8
+  end interface clEnqueueReadBuffer
 
 contains
 
@@ -159,6 +182,188 @@ contains
     call clEnqueueNDRangeKernel_low(command_queue, kernel, work_dim, globalsizes(1), localsizes(1), errcode_ret)
 
   end subroutine clEnqueueNDRangeKernel_simple
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueWriteBuffer_integer4(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(inout) :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    integer(4),             intent(in)    :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueWriteBuffer_integer4
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueWriteBuffer_integer8(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(inout) :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    integer(8),             intent(in)    :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueWriteBuffer_integer8
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueWriteBuffer_real4(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(inout) :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    real(4),                intent(in)    :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueWriteBuffer_real4
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueWriteBuffer_real8(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(inout) :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    real(8),                intent(in)    :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueWriteBuffer_real8
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueWriteBuffer_complex4(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(inout) :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    complex(4),             intent(in)    :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueWriteBuffer_complex4
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueWriteBuffer_complex8(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(inout) :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    complex(8),             intent(in)    :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueWriteBuffer_complex8
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueReadBuffer_integer4(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(in)    :: buffer 
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    integer(4),             intent(out)   :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueReadBuffer_integer4
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueReadBuffer_integer8(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(in)    :: buffer 
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    integer(8),             intent(out)   :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueReadBuffer_integer8
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueReadBuffer_real4(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(in)    :: buffer 
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    real(4),                intent(out)   :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueReadBuffer_real4
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueReadBuffer_real8(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(in)    :: buffer 
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    real(8),                intent(out)   :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueReadBuffer_real8
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueReadBuffer_complex4(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(in)    :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    complex(4),             intent(out)   :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueReadBuffer_complex4
+
+  ! ---------------------------------------
+
+  subroutine clEnqueueReadBuffer_complex8(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+    type(cl_command_queue), intent(inout) :: command_queue
+    type(cl_mem),           intent(in)    :: buffer
+    integer,                intent(in)    :: blocking_write
+    integer(8),             intent(in)    :: offset
+    integer(8),             intent(in)    :: cb
+    complex(8),             intent(out)   :: ptr
+    integer,                intent(out)   :: errcode_ret
+    
+    call clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+
+  end subroutine clEnqueueReadBuffer_complex8
+
+  ! ---------------------------------------
 
 end module cl_command_queue_m
 
