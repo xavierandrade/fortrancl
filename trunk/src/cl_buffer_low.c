@@ -39,3 +39,10 @@ void FC_FUNC_(clreleasememobject_low, CLRELEASEMEMOBJECT_LOW)(cl_mem * memobj, i
 }
 
 /* -----------------------------------------------------------------------*/
+
+void FC_FUNC_(clretainmemobject_low, CLRETAINMEMOBJECT_LOW)(cl_mem * memobj, int * status){
+
+  *status = (int)clRetainMemObject(*memobj);
+}
+
+/* -----------------------------------------------------------------------*/
