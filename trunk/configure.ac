@@ -92,6 +92,7 @@ AM_CONDITIONAL(F90_MOD_UPPERCASE, [test x$ax_f90_mod_uppercase = xyes])
 AC_CONFIG_FILES([Makefile
                  src/Makefile
                  examples/Makefile
+                 testsuite/Makefile
                  fortrancl.pc])
 
 AC_OUTPUT

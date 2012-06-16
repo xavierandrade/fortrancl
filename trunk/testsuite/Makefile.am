@@ -17,11 +17,18 @@
 ##
 ## $Id$
 
-ACLOCAL_AMFLAGS = -I m4
+check_PROGRAMS = devices sum
 
-SUBDIRS = src examples testsuite
-CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc ifc*
+TESTS = $(check_PROGRAMS)
 
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = fortrancl.pc
+sum_SOURCES = sum.f90
+sum_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
+dist_noinst_DATA = sum.cl
+
+devices_SOURCES = devices.f90
+devices_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
+
+AM_FCFLAGS = @F90_MODULE_FLAG@$(top_builddir)/src
+
+CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc* $(noinst_PROGRAMS)
 
