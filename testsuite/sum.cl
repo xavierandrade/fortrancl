@@ -22,3 +22,10 @@ __kernel void sum(const int size, const __global float * vec1, __global float * 
   if(ii < size) vec2[ii] += vec1[ii];
 
 }
+
+/*
+ Local Variables:
+ mode: c
+ coding: utf-8
+ End:
+*/

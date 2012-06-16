@@ -73,7 +73,7 @@ program sum
   ! read the resulting vector from device memory
   call clEnqueueReadBuffer(command_queue, cl_vec2, cl_bool(.true.), 0_8, size_in_bytes, vec2(1), ierr)
 
-  if(any((vec2 - 3.0) > epsilon(3.0))) call error_exit('Wrong result')
+  if(any(abs(vec2 - 3.0) > epsilon(3.0))) call error_exit('Wrong result')
 
   !=====================
   ! RELEASE EVERYTHING
