@@ -72,3 +72,11 @@ void FC_FUNC_(clreleaseprogram_low, CLRELEASEPROGRAM_LOW)
   *status = (int) clReleaseProgram(*program);
 }
 
+/* -----------------------------------------------------------------------*/
+
+void FC_FUNC_(clretainprogram_low, CLRETAINPROGRAM_LOW)
+     (cl_program * program, int * status){
+
+  *status = (int) clRetainProgram(*program);
+}
+

@@ -26,6 +26,7 @@ module cl_command_queue_m
   public ::                          &
     clCreateCommandQueue,            &
     clReleaseCommandQueue,           &
+    clRetainCommandQueue,            &
     clEnqueueNDRangeKernel,          &
     clEnqueueWriteBuffer,            &
     clEnqueueReadBuffer,             &
@@ -74,6 +75,22 @@ module cl_command_queue_m
     end subroutine clReleaseCommandQueue_low
 
   end interface clReleaseCommandQueue
+
+  ! ----------------------------------------------------
+
+  interface clRetainCommandQueue
+
+    subroutine clRetainCommandQueue_low(command_queue, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_command_queue), intent(inout) :: command_queue
+      integer,                intent(out)   :: errcode_ret
+
+    end subroutine clRetainCommandQueue_low
+
+  end interface clRetainCommandQueue
 
   ! ----------------------------------------------------
 

@@ -28,6 +28,7 @@ module cl_program_m
     clCreateProgramWithSource,       &
     clBuildProgram,                  &
     clReleaseProgram,                &
+    clRetainProgram,                 &
     clGetProgramBuildInfo
 
   interface clReleaseProgram
@@ -42,6 +43,21 @@ module cl_program_m
     end subroutine clReleaseProgram_low
 
   end interface clReleaseProgram
+
+  ! ----------------------------------------------------
+
+  interface clRetainProgram
+
+    subroutine clRetainProgram_low(program, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_program), intent(inout) :: program
+      integer,          intent(out)   :: errcode_ret
+    end subroutine clRetainProgram_low
+
+  end interface clRetainProgram
 
   ! ----------------------------------------------------
 

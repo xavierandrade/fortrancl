@@ -24,6 +24,7 @@ module cl
   use cl_constants_m
   use cl_context_m
   use cl_device_m
+  use cl_event_m
   use cl_kernel_m
   use cl_platform_m
   use cl_program_m
