@@ -75,8 +75,6 @@ program char
 
   call clReleaseKernel(kernel, ierr)
   call clReleaseCommandQueue(command_queue, ierr)
-  call clReleaseDevice(device, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('clReleaseDevice error.')
   call clReleaseContext(context, ierr)
   
 end program char

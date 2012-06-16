@@ -26,9 +26,7 @@ module cl_device_m
 
   public ::                          &
     clGetDeviceInfo,                 &
-    clGetDeviceIDs,                  &
-    clReleaseDevice,                 &
-    clRetainDevice
+    clGetDeviceIDs
 
   ! ---------------------------------------------------
 
@@ -87,29 +85,31 @@ module cl_device_m
   end interface clGetDeviceInfo
 
   ! ----------------------------------------------------
-
-  interface clReleaseDevice
-    subroutine clReleaseDevice_low(device, errcode_ret)
-      use cl_types_m
-      
-      implicit none
-      type(cl_device_id), intent(inout) :: device
-      integer,            intent(out)   :: errcode_ret
-    end subroutine clReleaseDevice_low
-  end interface clReleaseDevice
-
+  ! These functions are OpenCL 1.2, I will not include them for the moment.
+  ! 
+  
+  !  interface clReleaseDevice
+  !    subroutine clReleaseDevice_low(device, errcode_ret)
+  !      use cl_types_m
+  !      
+  !      implicit none
+  !      type(cl_device_id), intent(inout) :: device
+  !      integer,            intent(out)   :: errcode_ret
+  !    end subroutine clReleaseDevice_low
+  !  end interface clReleaseDevice
+  
   ! ----------------------------------------------------
 
-  interface clRetainDevice
-    subroutine clRetainDevice_low(device, errcode_ret)
-      use cl_types_m
-      
-      implicit none
-      type(cl_device_id), intent(inout) :: device
-      integer,            intent(out)   :: errcode_ret
-    end subroutine clRetainDevice_low
-  end interface clRetainDevice
-
+  !  interface clRetainDevice
+  !    subroutine clRetainDevice_low(device, errcode_ret)
+  !      use cl_types_m
+  !      
+  !      implicit none
+  !      type(cl_device_id), intent(inout) :: device
+  !      integer,            intent(out)   :: errcode_ret
+  !    end subroutine clRetainDevice_low
+  !  end interface clRetainDevice
+  
   ! ---------------------------------------------------
   ! some auxiliary functions
   !
