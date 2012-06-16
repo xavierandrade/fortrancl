@@ -23,78 +23,18 @@ program sum
 
   implicit none
 
-  type(cl_platform_id)   :: platform
   type(cl_device_id)     :: device
   type(cl_context)       :: context
   type(cl_command_queue) :: command_queue
-  type(cl_program)       :: prog
   type(cl_kernel)        :: kernel
-
-  integer    :: num, ierr, irec, size
+  integer    :: size, ierr
   integer(8) :: size_in_bytes, globalsize, localsize
-  character(len = 100)  :: info
-  integer, parameter :: iunit = 10
-  integer, parameter :: source_length = 1000
-  character(len = source_length) :: source
   real, allocatable  :: vec1(:), vec2(:)
   type(cl_mem)       :: cl_vec1, cl_vec2
 
-  !=====================
-  ! INITIALIZATION
-  !=====================
+  call initialize(device, context, command_queue)
 
-  ! get the platform ID
-  call clGetPlatformIDs(platform, num, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Cannot get CL platform.')
-
-  ! get the device ID
-  call clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, device, num, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Cannot get CL device.')
-
-  ! get the device name and print it
-  call clGetDeviceInfo(device, CL_DEVICE_NAME, info, ierr)
-  print*, "CL device: ", info
-
-  ! create the context and the command queue
-  context = clCreateContext(platform, device, ierr)
-  command_queue = clCreateCommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, ierr)
-
-  !=====================
-  ! BUILD THE KERNEL
-  !=====================
-
-  ! read the source file
-  open(unit = iunit, file = 'sum.cl', access='direct', status = 'old', action = 'read', iostat = ierr, recl = 1)
-  if (ierr /= 0) then
-    call error_exit('Cannot open file sum.cl')
-  end if
-
-  source = ''
-  irec = 1
-  do
-    read(unit = iunit, rec = irec, iostat = ierr) source(irec:irec)
-    if (ierr /= 0) exit
-    if(irec == source_length) stop 'Error: CL source file is too big'
-    irec = irec + 1
-  end do
-  close(unit = iunit)
-
-  ! create the program
-  prog = clCreateProgramWithSource(context, source, ierr)
-  if(ierr /= CL_SUCCESS) stop 'Error: cannot create program from source.'
-
-  ! build
-  call clBuildProgram(prog, '-cl-mad-enable', ierr)
-
-  ! get the compilation log
-  call clGetProgramBuildInfo(prog, device, CL_PROGRAM_BUILD_LOG, source, irec)
-  if(len(trim(source)) > 0) print*, trim(source)
-
-  if(ierr /= CL_SUCCESS) call error_exit('Error: program build failed.')
-
-  ! finally get the kernel and release the program
-  kernel = clCreateKernel(prog, 'sum', ierr)
-  call clReleaseProgram(prog, ierr)
+  call build_kernel('sum.cl', 'sum', context, device, kernel)
 
   !=====================
   ! RUN THE KERNEL
@@ -132,6 +72,8 @@ program sum
 
   ! read the resulting vector from device memory
   call clEnqueueReadBuffer(command_queue, cl_vec2, cl_bool(.true.), 0_8, size_in_bytes, vec2(1), ierr)
+
+  if(any((vec2 - 3.0) > epsilon(3.0))) call error_exit('Wrong result')
 
   !=====================
   ! RELEASE EVERYTHING
