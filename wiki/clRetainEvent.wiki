@@ -1,0 +1,13 @@
+#labels Procedures
+Increments the event reference count.
+
+Interface to OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clRetainEvent  clRetainEvent].
+
+== Interface ==
+
+<code language="Fortran">
+subroutine clRetainEvent(event, errcode_ret)
+  type(cl_event),   intent(inout) :: event
+  integer,          intent(out)   :: errcode_ret
+end subroutine clRetainEvent
+</code>
