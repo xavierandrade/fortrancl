@@ -17,7 +17,8 @@
 ##
 ## $Id$
 
-check_PROGRAMS = devices sum
+check_PROGRAMS = devices sum char
+dist_noinst_DATA = sum.cl char.cl
 
 TESTS = $(check_PROGRAMS)
 
@@ -26,7 +27,9 @@ UTILS_O = utils.o
 
 sum_SOURCES = sum.f90 $(UTILS)
 sum_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
-dist_noinst_DATA = sum.cl
+
+char_SOURCES = char.f90 $(UTILS)
+char_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 
 devices_SOURCES = devices.f90
 devices_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
