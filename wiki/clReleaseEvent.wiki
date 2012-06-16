@@ -1,0 +1,12 @@
+Decrement the event reference count.
+
+Interface to OpenCL [http://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clReleaseEvent  clReleaseEvent].
+
+== Interface ==
+
+<code language="Fortran">
+subroutine clReleaseEvent(event, errcode_ret)
+  type(cl_event),   intent(inout) :: event
+  integer,          intent(out)   :: errcode_ret
+end subroutine clReleaseEvent
+</code>
