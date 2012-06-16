@@ -26,7 +26,9 @@ module cl_device_m
 
   public ::                          &
     clGetDeviceInfo,                 &
-    clGetDeviceIDs
+    clGetDeviceIDs,                  &
+    clReleaseDevice,                 &
+    clRetainDevice
 
   ! ---------------------------------------------------
 
@@ -84,6 +86,30 @@ module cl_device_m
 
   end interface clGetDeviceInfo
 
+  ! ----------------------------------------------------
+
+  interface clReleaseDevice
+    subroutine clReleaseDevice_low(device, errcode_ret)
+      use cl_types_m
+      
+      implicit none
+      type(cl_device_id), intent(inout) :: device
+      integer,            intent(out)   :: errcode_ret
+    end subroutine clReleaseDevice_low
+  end interface clReleaseDevice
+
+  ! ----------------------------------------------------
+
+  interface clRetainDevice
+    subroutine clRetainDevice_low(device, errcode_ret)
+      use cl_types_m
+      
+      implicit none
+      type(cl_device_id), intent(inout) :: device
+      integer,            intent(out)   :: errcode_ret
+    end subroutine clRetainDevice_low
+  end interface clRetainDevice
+
   ! ---------------------------------------------------
   ! some auxiliary functions
   !
@@ -111,6 +137,8 @@ module cl_device_m
       type(cl_device_id),   intent(out)  :: device
     end subroutine clgetdeviceids_getdev
   end interface
+
+  ! ----------------------------------------------------
   
 contains
 

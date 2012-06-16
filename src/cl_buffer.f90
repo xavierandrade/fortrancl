@@ -24,8 +24,9 @@ module cl_buffer_m
 
   public ::                          &
     clCreateBuffer,                  &
-    clReleaseMemObject
-
+    clReleaseMemObject,              &
+    clRetainMemObject
+  
   interface clReleaseMemObject
 
     subroutine clReleaseMemObject_low(memobj, errcode_ret)
@@ -38,6 +39,23 @@ module cl_buffer_m
     end subroutine clReleaseMemObject_low
 
   end interface
+
+  ! -----------------------------------------------
+
+  interface clRetainMemObject
+
+    subroutine clRetainMemObject_low(memobj, errcode_ret)
+      use cl_types_m
+      
+      implicit none
+      
+      type(cl_mem),           intent(inout) :: memobj
+      integer,                intent(out)   :: errcode_ret
+    end subroutine clRetainMemObject_low
+
+  end interface clRetainMemObject
+
+  ! -----------------------------------------------
 
   interface clCreateBuffer
     module procedure clCreateBuffer_noptr
