@@ -21,7 +21,10 @@ check_PROGRAMS = devices sum
 
 TESTS = $(check_PROGRAMS)
 
-sum_SOURCES = sum.f90
+UTILS = utils.f90
+UTILS_O = utils.o
+
+sum_SOURCES = sum.f90 $(UTILS)
 sum_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 dist_noinst_DATA = sum.cl
 
@@ -32,3 +35,4 @@ AM_FCFLAGS = @F90_MODULE_FLAG@$(top_builddir)/src
 
 CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc* $(noinst_PROGRAMS)
 
+sum.o : sum.f90 $(UTILS_O)

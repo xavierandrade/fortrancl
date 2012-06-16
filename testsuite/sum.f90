@@ -19,6 +19,7 @@
 
 program sum
   use cl
+  use utils
 
   implicit none
 
@@ -44,11 +45,11 @@ program sum
 
   ! get the platform ID
   call clGetPlatformIDs(platform, num, ierr)
-  if(ierr /= CL_SUCCESS) stop "Cannot get CL platform."
+  if(ierr /= CL_SUCCESS) call error_exit('Cannot get CL platform.')
 
   ! get the device ID
   call clGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, device, num, ierr)
-  if(ierr /= CL_SUCCESS) stop "Cannot get CL device."
+  if(ierr /= CL_SUCCESS) call error_exit('Cannot get CL device.')
 
   ! get the device name and print it
   call clGetDeviceInfo(device, CL_DEVICE_NAME, info, ierr)
@@ -64,7 +65,9 @@ program sum
 
   ! read the source file
   open(unit = iunit, file = 'sum.cl', access='direct', status = 'old', action = 'read', iostat = ierr, recl = 1)
-  if (ierr /= 0) stop 'Cannot open file sum.cl'
+  if (ierr /= 0) then
+    call error_exit('Cannot open file sum.cl')
+  end if
 
   source = ''
   irec = 1
@@ -87,7 +90,7 @@ program sum
   call clGetProgramBuildInfo(prog, device, CL_PROGRAM_BUILD_LOG, source, irec)
   if(len(trim(source)) > 0) print*, trim(source)
 
-  if(ierr /= CL_SUCCESS) stop 'Error: program build failed.'
+  if(ierr /= CL_SUCCESS) call error_exit('Error: program build failed.')
 
   ! finally get the kernel and release the program
   kernel = clCreateKernel(prog, 'sum', ierr)
