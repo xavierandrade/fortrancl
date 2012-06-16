@@ -171,6 +171,8 @@ void FC_FUNC_(clgetdeviceinfo_int, CLGETDEVICEINFO_INT)
   *param_value = (cl_int) param_value64;
 }
 
+#ifdef  CL_VERSION_1_2
+
 /* -----------------------------------------------------------------------*/
 
 void FC_FUNC_(clreleasedevice_low, CLRELEASEDEVICE_LOW)
@@ -188,3 +190,5 @@ void FC_FUNC_(clretaindevice_low, CLRETAINDEVICE_LOW)
 }
 
 /* -----------------------------------------------------------------------*/
+
+#endif
