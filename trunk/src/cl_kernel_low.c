@@ -46,6 +46,13 @@ void FC_FUNC_(clreleasekernel_low, CLRELEASEKERNEL_LOW)(cl_kernel * kernel, int 
   *status = (int) clReleaseKernel(*kernel);
 }
 
+
+/* -----------------------------------------------------------------------*/
+
+void FC_FUNC_(clretainkernel_low, CLRETAINKERNEL_LOW)(cl_kernel * kernel, int * status){
+  *status = (int) clRetainKernel(*kernel);
+}
+
 /* -----------------------------------------------------------------------*/
 
 void FC_FUNC_(clsetkernelarg_buf, CLSETKERNELARG_BUF)

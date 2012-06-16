@@ -26,7 +26,8 @@ module cl_context_m
 
   public ::                          &
     clCreateContext,                 &
-    clReleaseContext
+    clReleaseContext,                &
+    clRetainContext
 
   interface clReleaseContext
     subroutine clReleaseContext_low(context, errcode_ret)
@@ -38,6 +39,21 @@ module cl_context_m
       integer,          intent(out)   :: errcode_ret
     end subroutine clReleaseContext_low
   end interface
+
+  ! ---------------------------------------
+
+  interface clRetainContext
+    subroutine clRetainContext_low(context, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_context), intent(inout) :: context
+      integer,          intent(out)   :: errcode_ret
+    end subroutine clRetainContext_low
+  end interface
+
+  ! ---------------------------------------
 
   interface clCreateContext
     module procedure clCreateContext_nocallback

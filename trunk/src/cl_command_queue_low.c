@@ -33,9 +33,14 @@ void FC_FUNC_(clcreatecommandqueue_low, CLCREATECOMMANDQUEUE_LOW)
 
 /* -----------------------------------------------------------------------*/
 
-/* clReleaseCommandQueue */
 void FC_FUNC_(clreleasecommandqueue_low, CLRELEASECOMMANDQUEUE_LOW)(cl_command_queue * command_queue, int * status){
   *status = (int) clReleaseCommandQueue(*command_queue);
+}
+
+/* -----------------------------------------------------------------------*/
+
+void FC_FUNC_(clretaincommandqueue_low, CLRETAINCOMMANDQUEUE_LOW)(cl_command_queue * command_queue, int * status){
+  *status = (int) clRetainCommandQueue(*command_queue);
 }
 
 /* -----------------------------------------------------------------------*/

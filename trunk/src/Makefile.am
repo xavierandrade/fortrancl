@@ -40,16 +40,18 @@ libfortrancl_la_SOURCES =       \
 	cl_kernel.f90          \
 	cl_platform.f90        \
 	cl_program.f90         \
+	cl_event.f90           \
 	cl.f90
 
-libfortrancl_la_SOURCES +=            \
+libfortrancl_la_SOURCES +=           \
 	cl_buffer_low.c              \
 	cl_command_queue_low.c       \
 	cl_context_low.c             \
 	cl_device_low.c              \
 	cl_kernel_low.c              \
 	cl_platform_low.c            \
-	cl_program_low.c
+	cl_program_low.c             \
+	cl_event_low.c
 
 noinst_HEADERS =               \
 	string_f.h             \

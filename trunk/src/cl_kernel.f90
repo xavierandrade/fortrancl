@@ -27,7 +27,8 @@ module cl_kernel_m
   public ::                          &
     clCreateKernel,                  &
     clReleaseKernel,                 &
-    clGetKernelWorkGroupInfo,           &
+    clRetainKernel,                  &
+    clGetKernelWorkGroupInfo,        &
     clSetKernelArgLocal,             &
     clSetKernelArg
 
@@ -41,6 +42,21 @@ module cl_kernel_m
       type(cl_kernel), intent(inout) :: kernel
       integer,         intent(out)   :: errcode_ret
     end subroutine clReleaseKernel_low
+
+  end interface
+
+  ! --------------------------------------------------
+
+  interface clRetainKernel
+
+    subroutine clRetainKernel_low(kernel, errcode_ret)
+      use cl_types_m
+
+      implicit none
+
+      type(cl_kernel), intent(inout) :: kernel
+      integer,         intent(out)   :: errcode_ret
+    end subroutine clRetainKernel_low
 
   end interface
 
