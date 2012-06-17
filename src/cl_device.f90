@@ -127,15 +127,6 @@ module cl_device_m
       integer,              intent(out)  :: errcode_ret
     end subroutine clgetdeviceids_listall
 
-    subroutine clgetdeviceids_getdev(alldevices, idevice, device)
-      use cl_types_m
-      
-      implicit none
-      
-      type(cl_device_id),   intent(in)   :: alldevices
-      integer,              intent(in)   :: idevice
-      type(cl_device_id),   intent(out)  :: device
-    end subroutine clgetdeviceids_getdev
   end interface
 
   ! ----------------------------------------------------
@@ -163,7 +154,7 @@ contains
     call clgetdeviceids_listall(platform, device_type, num_entries, dev(1), num_devices, errcode_ret)
 
     do idevice = 1, num_devices
-      call clgetdeviceids_getdev(dev(1), idevice - 1, devices(idevice))
+      call fortrancl_get_component(dev(1), idevice - 1, devices(idevice))
     end do
 
     deallocate(dev)

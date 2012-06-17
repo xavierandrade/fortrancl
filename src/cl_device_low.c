@@ -48,13 +48,6 @@ void FC_FUNC_(clgetdeviceids_listall, CLGETDEVICEIDS_LISTALL)
 
 /* -----------------------------------------------------------------------*/
 
-void FC_FUNC_(clgetdeviceids_getdev, CLGETDEVICEIDS_GETDEV)
-     (const cl_device_id * alldevices, const int * idevice, cl_device_id * device){
-  *device = alldevices[*idevice];
-}
-
-/* -----------------------------------------------------------------------*/
-
 void FC_FUNC_(clgetdeviceinfo_str, CLGETDEVICEINFO_STR)
      (const cl_device_id * device, const int * param_name, STR_F_TYPE param_value, int * status STR_ARG1){
   char info[2048];

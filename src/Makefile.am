@@ -44,6 +44,7 @@ libfortrancl_la_SOURCES =       \
 	cl.f90
 
 libfortrancl_la_SOURCES +=           \
+	utils.c                      \
 	cl_buffer_low.c              \
 	cl_command_queue_low.c       \
 	cl_context_low.c             \

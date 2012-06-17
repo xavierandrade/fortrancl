@@ -82,16 +82,6 @@ contains
         integer,              intent(out)  :: num_platforms
         integer,              intent(out)  :: errcode_ret
       end subroutine clgetplatformids_listall
-
-      subroutine clgetplatformids_getplat(allplatforms, iplatform, platform)
-        use cl_types_m
-
-        implicit none
-
-        type(cl_platform_id), intent(in)   :: allplatforms
-        integer,              intent(in)   :: iplatform
-        type(cl_platform_id), intent(out)  :: platform
-      end subroutine clgetplatformids_getplat
     end interface
 
     ! since our cl_platform_id type might be longer than the C
@@ -105,7 +95,7 @@ contains
     call clgetplatformids_listall(num_entries, plat_c(1), num_platforms, errcode_ret)
 
     do iplatform = 1, num_platforms
-      call clgetplatformids_getplat(plat_c(1), iplatform - 1, platforms(iplatform))
+      call fortrancl_get_component(plat_c(1), iplatform - 1, platforms(iplatform))
     end do
 
     deallocate(plat_c)
