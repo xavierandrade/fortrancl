@@ -24,16 +24,17 @@ module cl_event_m
 
   public ::                          &
     clReleaseEvent,                  &
-    clRetainEvent
-  
+    clRetainEvent,                   &
+    clWaitForEvents
+
   interface clReleaseEvent
 
-    subroutine clReleaseEvent_low(memobj, errcode_ret)
+    subroutine clReleaseEvent_low(event, errcode_ret)
       use cl_types_m
 
       implicit none
 
-      type(cl_event),         intent(inout) :: memobj
+      type(cl_event),         intent(inout) :: event
       integer,                intent(out)   :: errcode_ret
     end subroutine clReleaseEvent_low
 
@@ -43,16 +44,31 @@ module cl_event_m
 
   interface clRetainEvent
 
-    subroutine clRetainEvent_low(memobj, errcode_ret)
+    subroutine clRetainEvent_low(event, errcode_ret)
       use cl_types_m
       
       implicit none
       
-      type(cl_event),         intent(inout) :: memobj
+      type(cl_event),         intent(inout) :: event
       integer,                intent(out)   :: errcode_ret
     end subroutine clRetainEvent_low
 
   end interface clRetainEvent
+
+  ! -----------------------------------------------
+
+  interface clWaitForEvents
+
+    subroutine clWaitForEvents_low(event, errcode_ret)
+      use cl_types_m
+      
+      implicit none
+      
+      type(cl_event),         intent(in)    :: event
+      integer,                intent(out)   :: errcode_ret
+    end subroutine clWaitForEvents_low
+
+  end interface clWaitForEvents
 
 end module cl_event_m
 

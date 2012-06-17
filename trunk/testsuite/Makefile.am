@@ -17,7 +17,7 @@
 ##
 ## $Id$
 
-check_PROGRAMS = devices sum char
+check_PROGRAMS = devices queue sum char
 dist_noinst_DATA = sum.cl char.cl
 
 TESTS = $(check_PROGRAMS)
@@ -31,6 +31,9 @@ sum_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 char_SOURCES = char.f90 $(UTILS)
 char_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 
+queue_SOURCES = queue.f90 $(UTILS)
+queue_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
+
 devices_SOURCES = devices.f90
 devices_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 
@@ -39,3 +42,5 @@ AM_FCFLAGS = @F90_MODULE_FLAG@$(top_builddir)/src
 CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc* $(noinst_PROGRAMS)
 
 sum.o : sum.f90 $(UTILS_O)
+char.o : char.f90 $(UTILS_O)
+queue.o : queue.f90 $(UTILS_O)
