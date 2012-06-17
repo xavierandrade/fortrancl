@@ -79,16 +79,6 @@ contains
         integer,              intent(out)  :: errcode_ret
         type(cl_context),     intent(out)  :: context
       end subroutine clcreatecontext_low
-
-      subroutine clgetdeviceids_setdev(alldevices, idevice, device)
-        use cl_types_m
-
-        implicit none
-
-        type(cl_device_id),   intent(out)   :: alldevices
-        integer,              intent(in)   :: idevice
-        type(cl_device_id),   intent(in)  :: device
-      end subroutine clgetdeviceids_setdev
     end interface
 
     integer :: idev, num_devices
@@ -99,12 +89,9 @@ contains
     allocate(devs(1:num_devices))
 
     do idev = 1, num_devices
-
-      call clgetdeviceids_setdev(devs(1), idev - 1, devices(idev))
-
+      call fortrancl_set_component(devs(1), idev - 1, devices(idev))
     end do
     
-
     call clcreatecontext_low(platform, num_devices, devs(1), errcode_ret, context)
 
 

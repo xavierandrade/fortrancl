@@ -44,13 +44,6 @@ void FC_FUNC_(clgetplatformids_listall, CLGETPLATFORMIDS_LISTALL)
 
 /* -----------------------------------------------------------------------*/
 
-void FC_FUNC_(clgetplatformids_getplat, CLGETPLATFORMIDS_GETPLAT)
-     (const cl_platform_id * allplatforms, const int * iplatform, cl_platform_id * platform){
-  *platform = allplatforms[*iplatform];
-}
-
-/* -----------------------------------------------------------------------*/
-
 void FC_FUNC_(clgetplatforminfo_str, CLGETPLATFORMINFO_STR)
      (const cl_platform_id * platform, const int * param_name, STR_F_TYPE param_value, int * status STR_ARG1){
   char info[2048];
@@ -60,12 +53,6 @@ void FC_FUNC_(clgetplatforminfo_str, CLGETPLATFORMINFO_STR)
   TO_F_STR1(info, param_value);
 }
 
-/* -----------------------------------------------------------------------*/
-
-void FC_FUNC_(clgetdeviceids_setdev, CLGETDEVICEIDS_SETDEV)
-     (cl_device_id * alldevices, const int * idevice, const cl_device_id * device){
-  alldevices[*idevice] = *device;
-}
 
 
 
