@@ -13,10 +13,12 @@ module utils
 
   contains
 
-    subroutine error_exit(msg)
-      character(len=*), intent(in) :: msg
+    subroutine error_exit(msg, ierr)
+      character(len=*),  intent(in) :: msg
+      integer, optional, intent(in) :: ierr
 
       write(*,'(a)') msg
+      if(present(ierr)) write(*,'(a,i6)') 'Error code = ', ierr
       stop 1
 
     end subroutine error_exit

@@ -30,8 +30,8 @@ module cl_command_queue_m
     clEnqueueNDRangeKernel,          &
     clEnqueueWriteBuffer,            &
     clEnqueueReadBuffer,             &
-    clFinish
-
+    clFinish,                        &
+    clFlush
   
   ! The following functions are not declared since they are
   ! polymorphic beyond the capabilities of Fortran. They can be
@@ -106,6 +106,20 @@ module cl_command_queue_m
     end subroutine clFinish_low
 
   end interface clFinish
+
+  ! ----------------------------------------------------
+
+  interface clFlush    
+    subroutine clFlush_low(command_queue, errcode_ret)
+      use cl_types_m
+
+      implicit none
+      
+      type(cl_command_queue), intent(inout) :: command_queue
+      integer,                intent(out)   :: errcode_ret
+    end subroutine clFlush_low
+
+  end interface clFlush
 
   ! ----------------------------------------------------
 
