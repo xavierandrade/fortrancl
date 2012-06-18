@@ -58,7 +58,7 @@ void FC_FUNC_(clflush_low, CLFLUSH_LOW)(cl_command_queue * command_queue, int * 
 
 void FC_FUNC_(clenqueuendrangekernel_low, CLENQUEUENDRANGEKERNEL_LOW)
      (cl_command_queue * command_queue, cl_kernel * kernel, const int * work_dim, 
-      const cl_long * global_work_size, const cl_long * local_work_size, int * status){
+      const cl_long * global_work_size, const cl_long * local_work_size, cl_event * event, int * status){
 
   int ii;
   size_t * gsizes = (size_t *) malloc((*work_dim)*sizeof(size_t));
@@ -69,9 +69,14 @@ void FC_FUNC_(clenqueuendrangekernel_low, CLENQUEUENDRANGEKERNEL_LOW)
     lsizes[ii] = (size_t) local_work_size[ii];
   }
 
-  *status = (int) clEnqueueNDRangeKernel(*command_queue, *kernel, (cl_uint) *work_dim,
-					 NULL,  gsizes, lsizes, 0, NULL, NULL);
-
+  if(*event == NULL){
+    *status = (int) clEnqueueNDRangeKernel(*command_queue, *kernel, (cl_uint) *work_dim,
+					   NULL,  gsizes, lsizes, 0, NULL, NULL);
+  } else {
+    *status = (int) clEnqueueNDRangeKernel(*command_queue, *kernel, (cl_uint) *work_dim,
+					   NULL,  gsizes, lsizes, 0, NULL, event);
+  }
+  
   free(gsizes);
   free(lsizes);
 

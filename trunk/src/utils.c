@@ -41,3 +41,9 @@ void FC_FUNC_(fortrancl_set_component, FORTRANCL_SET_COMPONENT)
   array[*index] = *component;
 }
 
+/* -----------------------------------------------------------------------*/
+
+void FC_FUNC_(fortrancl_set_null, FORTRANCL_SET_NULL)
+     (ptrtype * ptr){
+  *ptr = NULL;
+}

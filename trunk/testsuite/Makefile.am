@@ -18,7 +18,7 @@
 ## $Id$
 
 check_PROGRAMS = devices queue sum char
-dist_noinst_DATA = sum.cl char.cl
+dist_noinst_DATA = sum.cl char.cl queue.cl
 
 TESTS = $(check_PROGRAMS)
 
