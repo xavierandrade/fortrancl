@@ -38,7 +38,7 @@ module cl_event_m
       integer,                intent(out)   :: errcode_ret
     end subroutine clReleaseEvent_low
 
-  end interface
+  end interface clReleaseEvent
 
   ! -----------------------------------------------
 
@@ -46,9 +46,9 @@ module cl_event_m
 
     subroutine clRetainEvent_low(event, errcode_ret)
       use cl_types_m
-      
+
       implicit none
-      
+
       type(cl_event),         intent(inout) :: event
       integer,                intent(out)   :: errcode_ret
     end subroutine clRetainEvent_low
@@ -58,54 +58,54 @@ module cl_event_m
   ! -----------------------------------------------
 
   interface clWaitForEvents
+    module procedure clWaitForEvents_single
+    module procedure clWaitForEvents_array
+  end interface clWaitForEvents
 
-    subroutine clWaitForEvents_low(event_list, errcode_ret)
+  interface
+    subroutine clWaitForEvents_low(numevents, allevents, errcode_ret)
       use cl_types_m
-      
+
       implicit none
-      
-      type(cl_event),         intent(in)    :: event_list
+
+      integer,                intent(in)    :: numevents
+      type(cl_event),         intent(in)    :: allevents
       integer,                intent(out)   :: errcode_ret
     end subroutine clWaitForEvents_low
-    
-    module procedure clWaitForEvents_array
+  end interface
 
-  end interface clWaitForEvents
+contains
+
+  subroutine clWaitForEvents_single(event_list, errcode_ret)
+    type(cl_event),         intent(in)    :: event_list
+    integer,                intent(out)   :: errcode_ret
+
+    call clWaitForEvents_low(1, event_list, errcode_ret)
+
+  end subroutine clWaitForEvents_single
   
-  contains
+  ! --------------------------------------------------------------
 
-    subroutine clWaitForEvents_array(event_list, errcode_ret)
-      type(cl_event),         intent(in)    :: event_list(:)
-      integer,                intent(out)   :: errcode_ret
-      
-      type(cl_event), allocatable :: allevents(:)
-      integer                     :: numevents, ievent
-      
-      interface
-        subroutine clWaitForEvents_array_low(numevents, allevents, errcode_ret)
-          use cl_types_m
-          
-          implicit none
-          
-          integer,                intent(in)    :: numevents
-          type(cl_event),         intent(inout) :: allevents
-          integer,                intent(out)   :: errcode_ret
-        end subroutine clWaitForEvents_array_low
-      end interface
+  subroutine clWaitForEvents_array(event_list, errcode_ret)
+    type(cl_event),         intent(in)    :: event_list(:)
+    integer,                intent(out)   :: errcode_ret
 
-      numevents = ubound(event_list, dim = 1)
+    type(cl_event), allocatable :: allevents(:)
+    integer                     :: numevents, ievent
 
-      allocate(allevents(1:numevents))
-      
-      do ievent = 1, numevents
-        call fortrancl_set_component(allevents(1), ievent - 1, event_list(ievent))
-      end do
+    numevents = ubound(event_list, dim = 1)
 
-      call clWaitForEvents_array_low(numevents, allevents(1), errcode_ret)
+    allocate(allevents(1:numevents))
 
-      deallocate(allevents)
+    do ievent = 1, numevents
+      call fortrancl_set_component(allevents(1), ievent - 1, event_list(ievent))
+    end do
 
-    end subroutine clWaitForEvents_array    
+    call clWaitForEvents_low(numevents, allevents(1), errcode_ret)
+
+    deallocate(allevents)
+
+  end subroutine clWaitForEvents_array
 
 end module cl_event_m
 

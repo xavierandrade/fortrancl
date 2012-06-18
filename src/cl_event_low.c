@@ -36,15 +36,7 @@ void FC_FUNC_(clretainevent_low, CLRETAINEVENT_LOW)(cl_event * event, int * stat
 
 /* -----------------------------------------------------------------------*/
 
-void FC_FUNC_(clwaitforevents_low, CLWAITFOREVENTS_LOW)
-     (const cl_event * event, int * status){
-
-  *status = (int)clWaitForEvents(1, event);
-}
-
-/* -----------------------------------------------------------------------*/
-
-void FC_FUNC_(clwaitforevents_array_low, CLWAITFOREVENTS_ARRAY_LOW)
+void FC_FUNC_(clwaitforevents_low, CLWAITFOREVENTS_ARRAY_LOW)
      (const int * numevents, const cl_event * event, int * status){
 
   *status = (int)clWaitForEvents(*numevents, event);
