@@ -15,6 +15,15 @@ subroutine clEnqueueNDRangeKernel_simple(command_queue, kernel, globalsizes, loc
   integer(8),             intent(in)    :: localsizes(:)
   integer,                intent(out)   :: errcode_ret
 end subroutine
+
+subroutine clEnqueueNDRangeKernel(command_queue, kernel, globalsizes, localsizes, event, errcode_ret)
+  type(cl_command_queue), intent(inout) :: command_queue
+  type(cl_kernel),        intent(inout) :: kernel
+  integer(8),             intent(in)    :: globalsizes(:)
+  integer(8),             intent(in)    :: localsizes(:)
+  type(cl_event),         intent(out)   :: event
+  integer,                intent(out)   :: errcode_ret
+end subroutine clEnqueueNDRangeKernel
 </code>
 
 TODO: An interface that specifies an event list is missing.
