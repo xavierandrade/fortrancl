@@ -94,7 +94,7 @@ contains
 
     call clgetplatformids_listall(num_entries, plat_c(1), num_platforms, errcode_ret)
 
-    do iplatform = 1, num_platforms
+    do iplatform = 1, num_entries
       call fortrancl_get_component(plat_c(1), iplatform - 1, platforms(iplatform))
     end do
 
