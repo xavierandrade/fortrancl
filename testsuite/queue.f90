@@ -43,6 +43,9 @@ program queue
 
   call build_kernel('queue.cl', 'dummy', context, device, kernel)
 
+  call clSetKernelArg(kernel, 0, 1729, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clSetKernelArg.', ierr)
+
   ! get the localsize for the kernel (note that the sizes are integer(8) variable)
   call clGetKernelWorkGroupInfo(kernel, device, CL_KERNEL_WORK_GROUP_SIZE, localsize, ierr)
   if(ierr /= CL_SUCCESS) call error_exit('Error in clGetKernelWorkGroupInfo.', ierr)

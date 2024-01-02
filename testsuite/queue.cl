@@ -16,7 +16,7 @@
 ** $Id$
 **/
 
-__kernel void dummy(){
+__kernel void dummy(int foo){
 
 }
 
