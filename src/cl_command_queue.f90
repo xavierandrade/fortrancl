@@ -33,32 +33,30 @@ module cl_command_queue_m
     clFinish,                        &
     clFlush
   
-  ! The following functions are not declared since they are
-  ! polymorphic beyond the capabilities of Fortran. They can be
-  ! called, but no type checking will be done by the compiler.
-  
-  !  interface
-  !    subroutine clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
-  !      type(cl_command_queue), intent(inout) :: command_queue
-  !      type(cl_mem),           intent(inout) :: buffer
-  !      integer,                intent(in)    :: blocking_write
-  !      integer(8),             intent(in)    :: offset
-  !      integer(8),             intent(in)    :: cb
-  !      type(any),              intent(inout) :: ptr
-  !      integer,                intent(out)   :: errcode_ret
-  !    end subroutine clEnqueueWriteBufferImpl
-  
-  !    subroutine clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
-  !      type(cl_command_queue), intent(inout) :: command_queue
-  !      type(cl_mem),           intent(inout) :: buffer
-  !      integer,                intent(in)    :: blocking_write
-  !      integer(8),             intent(in)    :: offset
-  !      integer(8),             intent(in)    :: cb
-  !      type(any),              intent(inout) :: ptr
-  !      integer,                intent(out)   :: errcode_ret
-  !    end subroutine clEnqueueReadBufferImpl
-  
-  !  end interface
+  interface
+    subroutine clEnqueueWriteBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+      use cl_types_m
+      type(cl_command_queue), intent(inout) :: command_queue
+      type(cl_mem),           intent(inout) :: buffer
+      integer,                intent(in)    :: blocking_write
+      integer(8),             intent(in)    :: offset
+      integer(8),             intent(in)    :: cb
+      class(*)                              :: ptr
+      integer,                intent(out)   :: errcode_ret
+    end subroutine clEnqueueWriteBufferImpl
+
+    subroutine clEnqueueReadBufferImpl(command_queue, buffer, blocking_write, offset, cb, ptr, errcode_ret)
+      use cl_types_m
+      type(cl_command_queue), intent(inout) :: command_queue
+      type(cl_mem),           intent(in)    :: buffer
+      integer,                intent(in)    :: blocking_write
+      integer(8),             intent(in)    :: offset
+      integer(8),             intent(in)    :: cb
+      class(*)                              :: ptr
+      integer,                intent(out)   :: errcode_ret
+    end subroutine clEnqueueReadBufferImpl
+
+  end interface
 
   ! ----------------------------------------------------
 

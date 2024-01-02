@@ -62,8 +62,6 @@ jobs:
         run: |
           autoreconf -i
           ./configure
-        env:
-          FCFLAGS: "-fallow-argument-mismatch"
 
       - name: Build
         run: make -e -j 2
