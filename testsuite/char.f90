@@ -30,7 +30,7 @@ program char
   integer    :: size, ierr
   integer(8) :: size_in_bytes, globalsize, localsize
   type(cl_mem)        :: cl_string
-  integer, parameter  :: string_length = 1024
+  integer, parameter  :: string_length = 4096
   character(len=string_length) :: string1, string2
 
   call initialize(device, context, command_queue)
