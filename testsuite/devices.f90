@@ -19,6 +19,7 @@
 
 program devs
   use cl
+  use utils
 
   implicit none
 
@@ -30,15 +31,17 @@ program devs
 
   ! get the number of platforms
   call clGetPlatformIDs(num_platforms, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clGetPlatformIDs.', ierr)
 
   allocate(platforms(1:num_platforms))
 
   write(*, '(a,i1)')   'Number of CL platforms      : ', num_platforms
   write(*, '(a)')      ''
 
-  
+
   ! get an array of platforms
   call clGetPlatformIDs(platforms, num_platforms, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clGetPlatformIDs.', ierr)
 
   ! iterate over platforms
   do iplat = 1, num_platforms
@@ -47,17 +50,21 @@ program devs
     write(*, '(a,i1)') 'Platform number             : ', iplat
 
     call clGetPlatformInfo(platforms(iplat), CL_PLATFORM_VENDOR, info, ierr)
+    if(ierr /= CL_SUCCESS) call error_exit('Error in clGetPlatformInfo.', ierr)
     write(*, '(2a)')   'Vendor                      : ', trim(info)
 
     call clGetPlatformInfo(platforms(iplat), CL_PLATFORM_NAME, info, ierr)
+    if(ierr /= CL_SUCCESS) call error_exit('Error in clGetPlatformInfo.', ierr)
     write(*, '(2a)')   'Name                        : ', trim(info)
 
     call clGetPlatformInfo(platforms(iplat), CL_PLATFORM_VERSION, info, ierr)
+    if(ierr /= CL_SUCCESS) call error_exit('Error in clGetPlatformInfo.', ierr)
     write(*, '(2a)')   'Version                     : ', trim(info)
 
     ! get the device ID
     call clGetDeviceIDs(platforms(iplat), CL_DEVICE_TYPE_ALL, num_devices, ierr)
-  
+    if(ierr /= CL_SUCCESS) call error_exit('Error in clGetDeviceIDs.', ierr)
+
     write(*, '(a,i1)') 'Number of devices           : ', num_devices
     write(*, '(a)')      ''
 
@@ -65,11 +72,13 @@ program devs
 
     ! get the device ID
     call clGetDeviceIDs(platforms(iplat), CL_DEVICE_TYPE_ALL, devices, num_devices, ierr)
-    
+    if(ierr /= CL_SUCCESS) call error_exit('Error in clGetDeviceIDs.', ierr)
+
     do idev = 1, num_devices
       write(*, '(a,i1)') '    Device number           : ', idev
 
       call clGetDeviceInfo(devices(idev), CL_DEVICE_TYPE, val, ierr)
+      if(ierr /= CL_SUCCESS) call error_exit('Error in clGetDeviceInfo.', ierr)
       select case(val)
       case(CL_DEVICE_TYPE_CPU)
         info = 'CPU'
@@ -82,12 +91,15 @@ program devs
       write(*, '(2a)')   '    Device type             : ', trim(info)
 
       call clGetDeviceInfo(devices(idev), CL_DEVICE_VENDOR, info, ierr)
+      if(ierr /= CL_SUCCESS) call error_exit('Error in clGetDeviceInfo.', ierr)
       write(*, '(2a)')   '    Device vendor           : ', trim(info)
 
       call clGetDeviceInfo(devices(idev), CL_DEVICE_NAME, info, ierr)
+      if(ierr /= CL_SUCCESS) call error_exit('Error in clGetDeviceInfo.', ierr)
       write(*, '(2a)')   '    Device name             : ', trim(info)
 
       call clGetDeviceInfo(devices(idev), CL_DEVICE_GLOBAL_MEM_SIZE, val, ierr)
+      if(ierr /= CL_SUCCESS) call error_exit('Error in clGetDeviceInfo.', ierr)
       write(*, '(a,i4)') '    Device memory           : ', val/1024**2
 
       write(*, '(a)')      ''

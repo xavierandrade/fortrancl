@@ -36,51 +36,55 @@ program queue
   call initialize(device, context, command_queue)
 
   call clFinish(command_queue, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clFinish.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clFinish.', ierr)
 
   call clFlush(command_queue, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clFlush.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clFlush.', ierr)
 
   call build_kernel('queue.cl', 'dummy', context, device, kernel)
 
   ! get the localsize for the kernel (note that the sizes are integer(8) variable)
   call clGetKernelWorkGroupInfo(kernel, device, CL_KERNEL_WORK_GROUP_SIZE, localsize, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clGetKernelWorkGroupInfo.', ierr)
   globalsize = 1024_8*localsize
 
   ! execute the kernel
   call clEnqueueNDRangeKernel(command_queue, kernel, (/globalsize/), (/localsize/), event, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.', ierr)
 
   call clFinish(command_queue, ierr)
-  
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clFinish.', ierr)
+
   call clWaitForEvents(event, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clWaitForEvents.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clWaitForEvents.', ierr)
 
   call clRetainEvent(event, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clRetainEvent.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clRetainEvent.', ierr)
   call clReleaseEvent(event, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.', ierr)
   call clReleaseEvent(event, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.', ierr)
 
   ! execute the kernel
   call clEnqueueNDRangeKernel(command_queue, kernel, (/globalsize/), (/localsize/), events(1), ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.', ierr)
 
   call clEnqueueNDRangeKernel(command_queue, kernel, (/globalsize/), (/localsize/), events(2), ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.', ierr)
 
   call clWaitForEvents(events, ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clWaitForEvents.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clWaitForEvents.', ierr)
 
   call clReleaseEvent(events(1), ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.')
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.', ierr)
 
   call clReleaseEvent(events(2), ierr)
-  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.')
-
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseEvent.', ierr)
 
   call clReleaseCommandQueue(command_queue, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseCommandQueue.', ierr)
+
   call clReleaseContext(context, ierr)
-  
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseContext.', ierr)
+
 end program queue

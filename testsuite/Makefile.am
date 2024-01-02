@@ -34,7 +34,7 @@ char_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 queue_SOURCES = queue.f90 $(UTILS)
 queue_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 
-devices_SOURCES = devices.f90
+devices_SOURCES = devices.f90 $(UTILS)
 devices_LDADD = $(top_builddir)/src/libfortrancl.la @CL_LIBS@
 
 AM_FCFLAGS = @F90_MODULE_FLAG@$(top_builddir)/src
@@ -44,3 +44,4 @@ CLEANFILES = *~ *.bak *.mod *.MOD *.il *.d *.pc* ifc* $(noinst_PROGRAMS)
 sum.o : sum.f90 $(UTILS_O)
 char.o : char.f90 $(UTILS_O)
 queue.o : queue.f90 $(UTILS_O)
+devices.o : devices.f90 $(UTILS_O)
