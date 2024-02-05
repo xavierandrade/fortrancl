@@ -121,7 +121,7 @@ module cl_device_m
       
       type(cl_platform_id), intent(in)   :: platform
       integer,              intent(in)   :: device_type
-      integer,              intent(out)  :: num_entries
+      integer,              intent(in)   :: num_entries
       type(cl_device_id),   intent(out)  :: devices
       integer,              intent(out)  :: num_devices
       integer,              intent(out)  :: errcode_ret

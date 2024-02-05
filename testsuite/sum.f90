@@ -39,12 +39,12 @@ program sum
   !=====================
   ! RUN THE KERNEL
   !=====================
-  
+
   size = 50000
   size_in_bytes = int(size, 8)*4_8
   allocate(vec1(1:size))
   allocate(vec2(1:size))
-  
+
   vec1 = 1.0
   vec2 = 2.0
 
@@ -54,24 +54,33 @@ program sum
 
   ! copy data to device memory
   call clEnqueueWriteBuffer(command_queue, cl_vec1, cl_bool(.true.), 0_8, size_in_bytes, vec1(1), ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueWriteBuffer.', ierr)
   call clEnqueueWriteBuffer(command_queue, cl_vec2, cl_bool(.true.), 0_8, size_in_bytes, vec2(1), ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueWriteBuffer.', ierr)
 
   ! set the kernel arguments
   call clSetKernelArg(kernel, 0, size, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clSetKernelArg.', ierr)
   call clSetKernelArg(kernel, 1, cl_vec1, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clSetKernelArg.', ierr)
   call clSetKernelArg(kernel, 2, cl_vec2, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clSetKernelArg.', ierr)
 
   ! get the localsize for the kernel (note that the sizes are integer(8) variable)
   call clGetKernelWorkGroupInfo(kernel, device, CL_KERNEL_WORK_GROUP_SIZE, localsize, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clGetKernelWorkGroupInfo.', ierr)
   globalsize = int(size, 8)
   if(mod(globalsize, localsize) /= 0) globalsize = globalsize + localsize - mod(globalsize, localsize) 
 
   ! execute the kernel
   call clEnqueueNDRangeKernel(command_queue, kernel, (/globalsize/), (/localsize/), ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.', ierr)
   call clFinish(command_queue, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clFinish.', ierr)
 
   ! read the resulting vector from device memory
   call clEnqueueReadBuffer(command_queue, cl_vec2, cl_bool(.true.), 0_8, size_in_bytes, vec2(1), ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueReadBuffer.', ierr)
 
   if(any(abs(vec2 - 3.0) > epsilon(3.0))) call error_exit('Wrong result')
 
@@ -80,7 +89,10 @@ program sum
   !=====================
 
   call clReleaseKernel(kernel, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseKernel.', ierr)
   call clReleaseCommandQueue(command_queue, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseCommandQueue.', ierr)
   call clReleaseContext(context, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseContext.', ierr)
 
 end program sum

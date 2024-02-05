@@ -1,0 +1,74 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - os: ubuntu-latest
+        - os: macos-latest
+
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install \
+            clinfo gfortran ocl-icd-opencl-dev pocl-opencl-icd
+
+      # https://github.com/pocl/pocl/issues/1049
+      # https://github.com/joanbm/lib842/blob/a82d393/.github/workflows/build-and-test.yml#L65
+      - name: Fix POCL
+        if: runner.os == 'Linux'
+        run: |
+          cat << EOF > pocl-hack.c
+          #include <stddef.h>
+          struct FakeStringRef {
+            const char *data;
+            size_t len;
+          };
+          struct FakeStringRef _ZN4llvm3sys14getHostCPUNameEv() {
+            return (struct FakeStringRef){ .data = "x86-64", .len = 6 };
+          }
+          EOF
+
+          cc pocl-hack.c -fPIC -shared -o pocl-hack.so
+          echo "LD_PRELOAD=$PWD/pocl-hack.so" >> $GITHUB_ENV
+          rm pocl-hack.c
+
+      - name: Install macOS dependencies
+        if: runner.os == 'macOS'
+        run: |
+          brew install \
+            automake clinfo gfortran
+          echo "FC=gfortran-13" >> $GITHUB_ENV
+
+      - name: OpenCL platforms and devices
+        run: clinfo
+
+      - name: Configure
+        run: |
+          autoreconf -i
+          ./configure
+
+      - name: Build
+        run: make -e -j 2
+
+      - name: Test
+        run: |
+          make -e -j 2 check || {
+            cat testsuite/test-suite.log
+            false
+          }

@@ -30,7 +30,7 @@ program char
   integer    :: size, ierr
   integer(8) :: size_in_bytes, globalsize, localsize
   type(cl_mem)        :: cl_string
-  integer, parameter  :: string_length = 1024
+  integer, parameter  :: string_length = 4096
   character(len=string_length) :: string1, string2
 
   call initialize(device, context, command_queue)
@@ -43,25 +43,34 @@ program char
   size_in_bytes = int(string_length, 8)
 
   cl_string = clCreateBuffer(context, CL_MEM_READ_ONLY, size_in_bytes, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clCreateBuffer.', ierr)
 
   string1 = 'Pepper clemens sent the messenger nevertheless the reverend left the herd'
   print*, trim(string1)
 
   call clEnqueueWriteBuffer(command_queue, cl_string, cl_bool(.true.), 0_8, size_in_bytes, string1(1:1), ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueWriteBuffer.', ierr)
 
   call clSetKernelArg(kernel, 0, 'e', ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clSetKernelArg.', ierr)
   call clSetKernelArg(kernel, 1, 'a', ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clSetKernelArg.', ierr)
   call clSetKernelArg(kernel, 2, cl_string, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clSetKernelArg.', ierr)
 
   call clGetKernelWorkGroupInfo(kernel, device, CL_KERNEL_WORK_GROUP_SIZE, localsize, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clGetKernelWorkGroupInfo.', ierr)
 
   globalsize = int(string_length, 8)
 
   ! execute the kernel
   call clEnqueueNDRangeKernel(command_queue, kernel, (/globalsize/), (/localsize/), ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueNDRangeKernel.', ierr)
   call clFinish(command_queue, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clFinish.', ierr)
 
   call clEnqueueReadBuffer(command_queue, cl_string, cl_bool(.true.), 0_8, size_in_bytes, string2(1:1), ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clEnqueueReadBuffer.', ierr)
 
   print*, trim(string2)
 
@@ -74,7 +83,10 @@ program char
   !=====================
 
   call clReleaseKernel(kernel, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseKernel.', ierr)
   call clReleaseCommandQueue(command_queue, ierr)
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseCommandQueue.', ierr)
   call clReleaseContext(context, ierr)
-  
+  if(ierr /= CL_SUCCESS) call error_exit('Error in clReleaseContext.', ierr)
+
 end program char
